@@ -27,4 +27,4 @@ const foodBankSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model("foodBank", foodBankSchema);
+module.exports = mongoose.model("FoodBank", foodBankSchema);
