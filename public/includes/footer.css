@@ -1,0 +1,54 @@
+.f-info {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	background-color: rgb(238, 234, 234);
+	/* flex-wrap: wrap; */
+	align-items: center;
+	padding-top: 0.25rem;
+	border-top: 0.15rem #dee2e6 solid;
+	font-size: 1.1rem;
+	padding-bottom: 1rem;
+	position: relative;
+	left: 0.75rem;
+}
+.f-info-links a {
+	text-decoration: none;
+	color: #222222;
+}
+.f-info-links a:hover {
+	text-decoration: underline;
+}
+.f-info-name {
+	display: flex;
+	justify-content: center;
+}
+.f-info-links {
+	display: flex;
+	justify-content: center;
+}
+
+.f-info-socialMedia {
+	/* width: 10%; */
+	font-size: 1.2rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.f-info-socialMedia a i {
+	margin-left: 1rem;
+	color: #222222 !important;
+}
+.f-info-socialMedia a {
+	text-decoration: none;
+}
+@media (max-width: 768px) {
+	.f-info-socialMedia {
+		margin-top: 0.35rem !important;
+		margin-bottom: 0.5rem;
+	}
+	.f-info {
+		justify-content: center;
+		line-height: 1.5rem;
+	}
+}

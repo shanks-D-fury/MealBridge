@@ -1,0 +1,130 @@
+.navbar {
+	margin-bottom: 2rem;
+}
+.fa-anchor {
+	color: #ff385c;
+	/* color: lightcoral; */
+	font-size: 2rem;
+}
+.navbar-nav {
+	font-size: 1.2rem;
+	position: relative;
+	top: 0.25rem;
+}
+.navbar-toggler {
+	/* background-color: white; */
+	border: solid 1px black;
+}
+.navbar-toggler:focus {
+	box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.389);
+}
+.border-bottom {
+	border-bottom-width: 0.1rem !important;
+}
+.nav-link {
+	color: #181717 !important;
+}
+#navbarMainTag {
+	position: relative;
+	left: 1rem;
+	font-size: 1.5rem;
+	margin-right: 2vw;
+	letter-spacing: 0.1rem;
+}
+#navbarMainaTagSmallText {
+	font-size: 1.25rem;
+}
+.search-input {
+	width: 25vw;
+	border-radius: 2rem;
+	padding: 0.5rem 2.5rem;
+	border: solid 1px rgba(0, 0, 0, 0.603);
+}
+@media (max-width: 991.9px) {
+	.search-input {
+		width: 60vw;
+	}
+}
+.search-input::placeholder {
+	font-size: 1rem;
+	opacity: 0.75;
+}
+.search-btn {
+	border-radius: 2rem;
+	padding: 0 1rem;
+}
+.fa-magnifying-glass {
+	display: inline;
+	font-size: smaller;
+	margin-right: 0.5rem;
+}
+.fa-magnifying-glass:hover {
+	background-color: #ff385c;
+}
+.form-control:focus {
+	border-color: rgb(255, 56, 92, 0.35); /* Optional: Change the border color */
+	box-shadow: 0 0 5px 3px rgb(255, 56, 92, 0.35); /* Custom green shadow */
+}
+.dropdown-menu {
+	width: inherit;
+	padding: 0 1rem;
+	opacity: 0;
+	transform: translateY(-10px);
+	transition: opacity 1s ease, transform 1s ease; /* Increase duration for smoother transition */
+}
+
+/* When the dropdown is open */
+.dropdown-menu.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+.dropdown {
+	padding: 0 0.4rem;
+	/* position: relative;
+	top: 2px; */
+}
+/* icon toggle  */
+#darkToggle i {
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Fade out */
+.fade-out {
+	opacity: 0;
+	transform: scale(0.9);
+}
+
+/* Fade in */
+.fade-in {
+	opacity: 1;
+	transform: scale(1);
+}
+@media (min-width: 1200px) {
+	.relative-search-bar {
+		position: relative;
+		left: 4rem;
+	}
+}
+@media (max-width: 991.9px) {
+	.relative-search-bar {
+		position: relative;
+		left: 5vw;
+	}
+}
+.relative-icon {
+	position: relative;
+	left: 1rem;
+}
+.fa-sun {
+	font-size: smaller;
+}
+
+@media (max-width: 991px) {
+	.dropdown-profile-btn {
+		position: relative;
+		left: 12.5vw;
+	}
+}
+.dropdown-divider {
+	margin: 0.15rem 0;
+}
