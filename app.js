@@ -26,7 +26,27 @@ async function main() {
 
 //home route
 app.get("/", (req, res) => {
-	res.send("hello MealBridge");
+	res.render("index.ejs");
+});
+
+//donate route
+app.get("/donate", (req, res) => {
+	res.send("donate page");
+});
+
+//food bank
+app.get("/foodbank", (req, res) => {
+	res.send("food bank page");
+});
+
+//expired food page link
+app.get("/expired", (req, res) => {
+	res.send("expired food page");
+});
+
+//one more link
+app.get("/one_more", (req, res) => {
+	res.send("one more link");
 });
 
 app.listen(8080, () => {
