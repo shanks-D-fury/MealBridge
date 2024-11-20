@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/includes/navbar.css" />
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="/listings"><h2>MealBridge</h2></a>
+		<a class="navbar-brand" href="/"><h2>MealBridge</h2></a>
 		<button
 			class="navbar-toggler btn btn-outline-dark"
 			type="button"
@@ -15,30 +15,30 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav ms-auto me-3">
-				<div class="">
-					<% if(!currentUser){ %>
+				<a class="nav-link dropdown-item ms-2" href="/"><b>Dashboard</b></a>
+				<% if(!currentUser){ %>
+				<div>
 					<a
 						class="nav-link dropdown-item ms-2"
 						aria-current="page"
 						href="/signup"
 						><b>SignUp</b></a
 					>
-					<a class="nav-link dropdown-item ms-2" href="/login"><b>Login</b></a>
-					<% } %> <% if(currentUser){ %>
-					<a
-						type="button"
-						class="dropdown-item nav-link mt-1 ms-2"
-						data-bs-toggle="modal"
-						data-bs-target="#exampleModal"
-					>
-						<b>profile</b>
-					</a>
-					<li><hr class="dropdown-divider" /></li>
-					<a class="nav-link dropdown-item ms-2" href="/logout"
-						><b>Logout</b></a
-					>
-					<% } %>
 				</div>
+				<div>
+					<a class="nav-link dropdown-item ms-2" href="/login"><b>Login</b></a>
+				</div>
+				<% } %> <% if(currentUser){ %>
+				<a
+					type="button"
+					class="dropdown-item nav-link mt-1 ms-2"
+					data-bs-toggle="modal"
+					data-bs-target="#exampleModal"
+				>
+					<b>profile</b>
+				</a>
+				<a class="nav-link dropdown-item ms-2" href="/logout"><b>Logout</b></a>
+				<% } %>
 			</div>
 		</div>
 	</div>

@@ -27,12 +27,12 @@ h1 {
 h2 {
 	font-size: 35px;
 	padding: 25px 25px;
-	color: rgba(62, 172, 180, 0.594);
+	color: rgb(5, 121, 113);
 }
 p {
 	font-size: 25px;
 	padding: 5px 5px;
-	color: rgb(80, 180, 173);
+	color: rgb(5, 121, 113);
 }
 
 .widget {
@@ -40,7 +40,6 @@ p {
 	margin: 5px;
 	border: 1px solid grey;
 	padding: 10px;
-
 	background-color: grey;
 }
 

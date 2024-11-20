@@ -3,8 +3,9 @@
 	text-align: center;
 }
 .navbar-brand h2 {
+	font-size: 2.5rem !important;
 	color: #007bff;
-	padding: 1rem;
+	padding: 0.1rem 2rem;
 }
 .navbar-nav {
 	font-size: 1.2rem;
@@ -17,9 +18,4 @@
 
 .border-bottom {
 	border-bottom-width: 0.1rem !important;
-}
-
-.form-control:focus {
-	border-color: rgb(255, 56, 92, 0.35); /* Optional: Change the border color */
-	box-shadow: 0 0 5px 3px rgb(255, 56, 92, 0.35); /* Custom green shadow */
 }
