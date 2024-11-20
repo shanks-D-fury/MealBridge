@@ -14,6 +14,7 @@ const LocalStrategy = require("passport-local");
 const mongo_url = "mongodb://127.0.0.1:27017/MealBridge";
 const User = require("./models/user.js");
 const ExpressError = require("./utils/ExpressError.js");
+const userRouter = require("./routes/user.js");
 
 // // FROM HERE
 // const store = MongoStore.create({
@@ -79,6 +80,8 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
 	res.render("elements/index.ejs");
 });
+
+app.use("/", userRouter);
 
 //donate route
 app.get("/donate", (req, res) => {

@@ -7,8 +7,8 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	phone_no: {
-		type: Number,
+	phoneNo: {
+		type: String,
 		required: true,
 	},
 });

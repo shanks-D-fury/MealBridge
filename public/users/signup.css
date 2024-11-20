@@ -1,0 +1,36 @@
+.signUp-form {
+	border: 1px solid black;
+	border-radius: 1rem;
+	padding: 1rem 1rem;
+	margin-top: 1rem;
+	position: relative;
+}
+.form-label {
+	font-weight: 500;
+}
+.form-control {
+	border: 1px solid black;
+}
+.form-control:focus {
+	border-color: rgb(5, 121, 113); /* Optional: Change the border color */
+	box-shadow: 0 0 5px 3px rgba(5, 121, 113, 0.234); /* Custom green shadow */
+}
+#togglePassword {
+	position: relative;
+	left: -0.5rem;
+}
+
+@media (max-width: 992px) {
+	#togglePassword {
+		left: -1.3rem;
+		scale: 0.75;
+	}
+}
+#phone {
+	width: 25vw;
+}
+@media (max-width: 700px) {
+	#phone {
+		width: 50vw;
+	}
+}

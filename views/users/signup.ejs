@@ -1,8 +1,13 @@
 <% layout("/layouts/boilerPlate.ejs") -%>
 <link rel="stylesheet" href="/users/signup.css" />
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/intl-tel-input/build/css/intlTelInput.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/intlTelInput.min.js"></script>
 <div class="row mb-3">
 	<div class="signUp-form col-md-4 offset-md-4 col-8 offset-2">
-		<h3 class="mb-3">SignUp On ComfortNest</h3>
+		<h3 class="mb-3">SignUp On MealBridge</h3>
 		<form
 			action="/signup"
 			method="post"
@@ -28,6 +33,16 @@
 					id="email"
 					placeholder="email"
 					class="form-control"
+					required
+				/>
+			</div>
+			<div class="mb-3">
+				<input
+					type="tel"
+					name="phoneNo"
+					id="phone"
+					class="form-control"
+					placeholder="98765 43210"
 					required
 				/>
 			</div>
@@ -68,7 +83,20 @@
 		</form>
 	</div>
 </div>
+<script>
+	const phoneInputField = document.getElementById("phone");
+	const iti = window.intlTelInput(phoneInputField, {
+		initialCountry: "in",
+		utilsScript:
+			"https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/utils.js", // for validation
+	});
 
+	document.querySelector("form").addEventListener("submit", function (e) {
+		if (!iti.isValidNumber()) {
+			e.preventDefault();
+		}
+	});
+</script>
 <script>
 	function validatePasswords() {
 		const password = document.getElementById("password").value;
