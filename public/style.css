@@ -2,62 +2,94 @@
 	padding: 0px;
 	margin: 0px;
 }
-body{
-	height: 100vh;
+body {
+	font-family: 'Arial', sans-serif;
+	margin: 0;
+	padding: 0;
 
-}
+  }
 .navigate img{
 	margin-right :100px;
 }
-header{
-	background-image: url(https://media.istockphoto.com/id/1352758440/photo/paper-shopping-food-bag-with-grocery-and-vegetables.jpg?s=2048x2048&w=is&k=20&c=W0ymPk0eL2zS6mSlvU4sjPfrYVe-GlQG1HkBEYxJFk8=);
+header {
 	
-}
-.navigate{
-	display: flex ;  
-	flex-direction: row ;
+	background-image: url(../public/images/banner.png);
+	background-size: cover;
+	
+	padding: 20px 0;
+	text-align: center;
+	background-position: center;
+	background-size: cover;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+ 
+
+nav {
+	display: flex;
+
 	justify-content: space-around;
 	align-items: center;
-	list-style-type: none;
-	padding: 25px;
-	
-}
-ul li a{
-	color:rgb(27, 2, 2);
-	text-decoration: none;
-	color: whitesmoke;
-}
-ul li{
-	font-size: larger;
-	
-}
-.btncontainer {
-	padding: 20px 20px;
-    display: flex;
-    flex-direction: row;
-	column-gap: 250px;
-	justify-content: center;
-}
+  }
+  
+  ul.navigate {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	align-items: center;
+  }
+  
+  ul.navigate li {
+	margin: 0 15px;
 
-.button {
-    padding: 15px 40px;
-    font-size: 25px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-h1{
-	font-size: 65px;
-	font-weight: 500;
-	letter-spacing: normal;
-	text-align: center;
-	color:whitesmoke;
-	padding-bottom: 60px;
-	padding-top: 30px;
-}
+
+  }
+  
+.logo {
+	width: 160px;
+	height: 160px;
+	margin: 10px 10px;
+
+	border-radius: 50%; /* Makes the image round */
+	border: 2px solid white; /* Optional: Add a border */
+	object-fit: cover; /* Ensures the image fits well inside the round container */
+  }
+  
+  ul.navigate li a {
+	text-decoration: underline;
+	font-size: 20px;
+	color: white;
+	transition: color 0.3s ease;
+  }
+  
+  ul.navigate li a:hover {
+	color: #007bff;
+  }
+  
+  .btncontainer {
+	margin: 20px 0;
+  }
+  
+  .button {
+	background-color: #007bff;
+	color: #ffffff;
+	border: none;
+	padding: 10px 20px;
+	margin: 5px;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+	background-color: #0056b3;
+  }
+  
+  h1 {
+	font-size: 39px;
+	color: white;
+	margin-top: 10px;
+  }
 .sec1{
 	display: flex ;  
 	flex-direction: column ;
@@ -68,13 +100,15 @@ h1{
 h2{
 	font-size:35px;
 	padding: 25px 25px;
-	color:rgba(62, 172, 180, 0.594);
+	color:#5ba3f8;
 }
 p{
 	font-size: 25px;
 	padding: 5px 5px;
-    color:rgb(80, 180, 173);
+    color:#5ba3f8;
 }
+
+
 
 .widget {
 	width: 70%;
@@ -126,7 +160,7 @@ p{
   
 
   footer {
-	background-color: rgb(80, 180, 173); /* Adjust background color as needed */
+	background-color: #5ba3f8; /* Adjust background color as needed */
 	padding: 20px;
   }
   
