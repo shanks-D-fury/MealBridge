@@ -1,5 +1,96 @@
 <% layout("/layouts/boilerPlate.ejs") -%>
+<link rel="stylesheet" href="/elements/style.css" />
 <body>
 	<!-- continue the frontEnd here  -->
-	<h2>MealBridge</h2>
+	<main>
+		<section class="secc1">
+			<div style="text-align: center">
+				<h2>WHO WE ARE</h2>
+			</div>
+			<div style="text-align: center">
+				<p>In response to the coronavirus pandemic, The Meal Bridge LA</p>
+				<p>was started by a Los Angeles high schooler, based off of The</p>
+				<p>Meal Bridge started in Atlanta, to help people working in</p>
+				<p>the restaurant and healthcare fields.</p>
+				<p>Hopefully, the need for this effort will be short and sweet.</p>
+			</div>
+			<div style="text-align: center">
+				<img
+					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP68AF4-ZENSI4NaeRKgiqBxmZzg5-8k5yXQ&s"
+					alt="logo"
+				/>
+			</div>
+		</section>
+		<div style="text-align: center">
+			<h2>Frequently asked questions</h2>
+		</div>
+		<section>
+			<div class="secc2">
+				<div class="widget" onclick="toggleWidget(this)">
+					<div class="questions">
+						<button class="expand-btn">What is MealBridge?</button>
+						<img src="../public/images/plus.svg" alt="plus" class="toggleimg" />
+					</div>
+
+					<div class="content">
+						<p>This is the content that will be expanded and collapsed.</p>
+					</div>
+				</div>
+
+				<div class="widget" onclick="toggleWidget(this)">
+					<div class="questions">
+						<button class="expand-btn">What is MealBridge?</button>
+						<img src="../public/images/plus.svg" alt="plus" class="toggleimg" />
+					</div>
+
+					<div class="content">
+						<p>This is the content that will be expanded and collapsed.</p>
+					</div>
+				</div>
+
+				<div class="widget" onclick="toggleWidget(this)">
+					<div class="questions">
+						<button class="expand-btn">What is MealBridge?</button>
+						<img src="../public/images/plus.svg" alt="plus" class="toggleimg" />
+					</div>
+
+					<div class="content">
+						<p>This is the content that will be expanded and collapsed.</p>
+					</div>
+				</div>
+
+				<div class="widget" onclick="toggleWidget(this)">
+					<div class="questions">
+						<button class="expand-btn">What is MealBridge?</button>
+						<img src="../public/images/plus.svg" alt="plus" class="toggleimg" />
+					</div>
+
+					<div class="content">
+						<p>This is the content that will be expanded and collapsed.</p>
+					</div>
+				</div>
+
+				<div class="widget" onclick="toggleWidget(this)">
+					<div class="questions">
+						<button class="expand-btn">What is MealBridge?</button>
+						<img src="../public/images/plus.svg" alt="plus" class="toggleimg" />
+					</div>
+
+					<div class="content">
+						<p>This is the content that will be expanded and collapsed.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="secc3">
+			<h2>Stay connected</h2>
+			<p>Sign up to receive news and updates about The Meal</p>
+			<p>Bridge LA</p>
+			<div class="btncontainer">
+				<button class="button">Login</button>
+				<button class="button">Sign Up</button>
+			</div>
+		</section>
+	</main>
 </body>
