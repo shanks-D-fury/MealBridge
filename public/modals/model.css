@@ -1,6 +1,9 @@
 .modal-image {
 	border-radius: 50%;
 }
+.modal-title {
+	padding: 0;
+}
 @media (max-width: 992px) {
 	.modal-image {
 		scale: 0.85;
