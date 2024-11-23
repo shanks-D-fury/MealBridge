@@ -7,14 +7,14 @@ body {
 	font-optical-sizing: auto;
 	font-weight: 360;
 	font-style: italic;
-	display: flex;
+	/* display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	background-color: #ddeeff;
+	background-color: #ddeeff; */
 }
-.container {
+/* .container {
 	flex: 1;
-}
+} */
 body::-webkit-scrollbar {
 	/* height: 8px; */
 	width: 0.65rem;
