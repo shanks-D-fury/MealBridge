@@ -4,6 +4,26 @@
 	margin: 0px;
 	box-sizing: border-box;
 }
+/* coustom styling for bootstrap {*/
+.container {
+	margin: 0;
+}
+@media (min-width: 769px) {
+	body {
+		overflow-x: hidden;
+	}
+}
+main {
+	position: relative;
+	left: 12.5%;
+	margin-top: 10vh;
+}
+footer {
+	width: 100vw;
+	position: relative;
+	left: -1vw;
+}
+/* } */
 
 /* Body Styling */
 body {
@@ -11,11 +31,6 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: black;
-}
-
-/* Navigation Styling */
-.navigate img {
-	margin-right: 100px;
 }
 
 header {
@@ -27,7 +42,6 @@ header {
 	padding: 20px 0;
 	text-align: center;
 	background-position: cover;
-	background-size: cover;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .headerContent {
