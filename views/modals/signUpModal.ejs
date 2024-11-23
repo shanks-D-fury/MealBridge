@@ -115,6 +115,11 @@
 			if (!iti.isValidNumber()) {
 				e.preventDefault();
 			}
+			let phoneNumber = phoneInputField.value;
+			phoneNumber = phoneNumber.replace(/\s+/g, "");
+			phoneNumber = Number(phoneNumber);
+			console.log("Processed Phone Number:", phoneNumber);
+			phoneInputField.value = phoneNumber;
 		});
 </script>
 <script>
