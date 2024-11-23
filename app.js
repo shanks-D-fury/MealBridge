@@ -28,7 +28,10 @@ async function main() {
 app.get("/", (req, res) => {
 	res.render("index.ejs");
 });
-
+//dashboard route
+app.get("/dashboard", (req, res) => {
+	res.render("dashboard.ejs");
+});
 //donate route
 app.get("/donate", (req, res) => {
 	res.send("donate page");
