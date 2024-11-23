@@ -83,6 +83,11 @@ app.get("/", (req, res) => {
 
 app.use("/", userRouter);
 
+//dashboard
+app.get("/dashboard", (req, res) => {
+	res.render("elements/dashboard.ejs");
+});
+
 //donate route
 app.get("/donate", (req, res) => {
 	res.send("donate page");

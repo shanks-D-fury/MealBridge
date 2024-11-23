@@ -14,7 +14,7 @@ module.exports.signUp = async (req, res, next) => {
 				return next(err);
 			}
 			req.flash("success", `Hi ${username} , Welcome To MealBridge!`);
-			res.redirect("/");
+			res.redirect("/dashboard");
 		});
 	} catch (err) {
 		req.flash("error", err.message);
@@ -28,7 +28,7 @@ module.exports.loginFormRender = async (req, res) => {
 
 module.exports.login = async (req, res) => {
 	let { username } = req.body;
-	let redirectUrl = res.locals.redirectUrl || "/";
+	let redirectUrl = res.locals.redirectUrl || "/dashboard";
 	req.flash("success", `Hello ${username}, Welcome Back To MealBridge!`);
 	res.redirect(redirectUrl);
 };
