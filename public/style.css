@@ -87,6 +87,9 @@ ul.navigate li {
 	border: 2px solid white;
 	object-fit: cover;
 }
+h2{
+	color: white;
+}
 
 /* Navigation Links */
 ul.navigate li a {
