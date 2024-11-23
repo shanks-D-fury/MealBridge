@@ -8,7 +8,7 @@
 <div
 	class="modal fade"
 	id="signUpModal"
-	tabindex="-1"
+	tabindex="-2"
 	aria-labelledby="signUpModalLabel"
 	aria-hidden="true"
 >
@@ -86,7 +86,7 @@
 									>
 								</div>
 								<div class="col-2">
-									<a class="btn btn-outline-dark" id="togglePassword">
+									<a class="btn btn-outline-dark" id="togglePasswordx">
 										<i class="fa-regular fa-eye"></i>
 									</a>
 								</div>
@@ -109,11 +109,13 @@
 			"https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/utils.js", // for validation
 	});
 
-	document.querySelector("form").addEventListener("submit", function (e) {
-		if (!iti.isValidNumber()) {
-			e.preventDefault();
-		}
-	});
+	document
+		.getElementById("signupForm")
+		.addEventListener("submit", function (e) {
+			if (!iti.isValidNumber()) {
+				e.preventDefault();
+			}
+		});
 </script>
 <script>
 	function validatePasswords() {
@@ -142,7 +144,7 @@
 
 	// to toggle the visiblity of the password
 	document
-		.getElementById("togglePassword")
+		.getElementById("togglePasswordx")
 		.addEventListener("click", function () {
 			const passwordInput = document.getElementById("confirmPassword");
 			const icon = this.querySelector("i");
