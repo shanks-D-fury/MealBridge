@@ -6,19 +6,8 @@
 main {
 	margin-top: 10px;
 }
-.logo {
-	width: 100px; /* Reduced size for responsiveness */
-	height: 100px;
-	margin: 10px 10px;
-	border-radius: 50%;
-	border: 2px solid white;
-	object-fit: cover;
-}
 h2 {
 	color: white;
-}
-header {
-	margin-bottom: 20px;
 }
 
 /* Card container */
