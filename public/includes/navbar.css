@@ -10,7 +10,11 @@
 		rgba(255, 255, 255, 0.199),
 		rgba(255, 255, 255, 0.044)
 	);
-	height: 11.5vh !important;
+}
+@media (max-width: 991.9px) {
+	.navbar {
+		height: 11.5vh !important;
+	}
 }
 
 .navbar-brand h2 {
