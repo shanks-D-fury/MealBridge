@@ -1,0 +1,23 @@
+label {
+	font-size: larger;
+}
+.form-control:focus,
+.form-select:focus {
+	border-color: #5ba4f862;
+	box-shadow: 0 0 5px 3px #5ba4f833;
+}
+.form-title::placeholder {
+	color: #ff385c !important;
+}
+
+.row input::placeholder,
+.row textarea::placeholder {
+	opacity: 0.5;
+}
+
+/* @media (max-width: 768px) {
+	.form-select {
+		width: 70%;
+		font-size: 12.5px;
+	}
+} */

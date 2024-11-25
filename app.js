@@ -15,6 +15,7 @@ const mongo_url = "mongodb://127.0.0.1:27017/MealBridge";
 const User = require("./models/user.js");
 const ExpressError = require("./utils/ExpressError.js");
 const userRouter = require("./routes/user.js");
+const { isLoggedIn } = require("./utils/Middlewares.js");
 
 // // FROM HERE
 // const store = MongoStore.create({
@@ -84,13 +85,13 @@ app.get("/", (req, res) => {
 app.use("/", userRouter);
 
 //dashboard
-app.get("/dashboard", (req, res) => {
+app.get("/dashboard", isLoggedIn, (req, res) => {
 	res.render("elements/dashboard.ejs");
 });
 
 //donate route
 app.get("/donate", (req, res) => {
-	res.send("donate page");
+	res.render("elements/donar.ejs");
 });
 
 //food bank
@@ -118,6 +119,6 @@ app.use((err, req, res, next) => {
 	res.status(statusCode).render("ErrorPage/Error.ejs", { message, statusCode });
 });
 
-app.listen(8080, () => {
+app.listen(8080, "0.0.0.0", () => {
 	console.log("ComfortNest Listening {Port: 8080}");
 });

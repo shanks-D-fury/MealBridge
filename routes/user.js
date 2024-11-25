@@ -18,7 +18,8 @@ router
 	.post(
 		saveRedirectUrl,
 		passport.authenticate("local", {
-			failureRedirect: "/login",
+			successRedirect: "/dashboard",
+			failureRedirect: "/",
 			failureFlash: true,
 		}),
 		AsyncWrap(userControllers.login)
