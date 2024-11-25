@@ -91,7 +91,7 @@ app.get("/dashboard", isLoggedIn, (req, res) => {
 
 //donate route
 app.get("/donate", (req, res) => {
-	res.send("donate page");
+	res.render("elements/donar.ejs");
 });
 
 //food bank
