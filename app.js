@@ -95,7 +95,7 @@ app.get("/donate", (req, res) => {
 
 //food bank
 app.get("/foodbank", (req, res) => {
-	res.send("food bank page");
+	res.render("elements/inventory.ejs");
 });
 
 //expired food page link
