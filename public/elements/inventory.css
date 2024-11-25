@@ -1,0 +1,48 @@
+.card {
+	border-radius: 10px;
+}
+.badge-pending {
+	background-color: #f0e68c;
+	color: #333;
+}
+.btn-accept {
+	background-color: #007b5e;
+	color: white;
+}
+.quick-stats .card {
+	border-radius: 10px;
+}
+.quick-stats .card-body {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.quick-stats .card-body div {
+	text-align: center;
+}
+.quick-stats .card-body div span {
+	display: block;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+.inventory-search {
+	position: relative;
+}
+.inventory-search input {
+	width: 100%;
+	padding-right: 2.5rem;
+}
+.inventory-search .fa-search {
+	position: absolute;
+	right: 0.75rem;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #6c757d;
+}
+.custom-border {
+	border: 5px solid #007b5e;
+	border-radius: 10px;
+}
+.card-large {
+	width: 110%;
+}
