@@ -19,26 +19,7 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav ms-auto me-3">
 				<a class="nav-link ms-2" href="/"><b>Dashboard</b></a>
-				<% if(!currentUser){ %>
-				<div>
-					<a
-						type="button"
-						class="nav-link ms-2"
-						data-bs-toggle="modal"
-						data-bs-target="#signUpModal"
-						><b>SignUp</b></a
-					>
-				</div>
-				<div>
-					<a
-						type="button"
-						class="nav-link ms-2"
-						data-bs-toggle="modal"
-						data-bs-target="#loginModal"
-						><b>Login</b></a
-					>
-				</div>
-				<% } %> <% if(currentUser){ %>
+				<% if(currentUser){ %>
 				<a
 					type="button"
 					class="nav-link ms-2"
