@@ -1,0 +1,53 @@
+.navbar {
+	margin-bottom: 2rem;
+	text-align: center;
+	background-color: transparent !important;
+	border-bottom-width: 0.01rem !important;
+	background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+	-webkit-backdrop-filter: blur(10px); /* For Safari support */
+	backdrop-filter: blur(10px); /* Adds the glass blur effect */
+	background: linear-gradient(
+		rgba(255, 255, 255, 0.199),
+		rgba(255, 255, 255, 0.044)
+	);
+}
+@media (max-width: 991.9px) {
+	.navbar {
+		height: 11.5vh !important;
+	}
+}
+
+.navbar-brand h2 {
+	/* font-size: 3vw; */
+	color: #007bff;
+	margin-left: 1rem;
+	/* padding: 2rem; */
+}
+.navbar-nav {
+	font-size: 1.2rem;
+
+	position: relative;
+	top: 0.25rem;
+}
+.navbar-toggler {
+	border: solid 1px black;
+}
+.nav-link {
+	color: #dee2e6;
+	opacity: 0.85;
+}
+.nav-link:hover {
+	opacity: 1;
+	color: #dee2e6;
+}
+.logo {
+	max-width: 50px; /* Adjust as per your design */
+	max-height: 50px; /* Adjust as per your design */
+	height: auto; /* Maintain aspect ratio */
+	width: auto;
+	border-radius: 50%;
+}
+.navbar-brand {
+	display: flex;
+	align-items: center;
+}

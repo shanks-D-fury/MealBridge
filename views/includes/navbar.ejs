@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/includes/navbar.css" />
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/dashboard"
+			><img src="/images/logo.png" alt="log" class="logo" />
+			<h2>MealBridge</h2></a
+		>
+		<button
+			class="navbar-toggler btn btn-outline-dark"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<i class="fa-solid fa-bars"></i>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav ms-auto me-3">
+				<a class="nav-link ms-2" href="/"><b>Dashboard</b></a>
+				<% if(!currentUser){ %>
+				<div>
+					<a
+						type="button"
+						class="nav-link ms-2"
+						data-bs-toggle="modal"
+						data-bs-target="#signUpModal"
+						><b>SignUp</b></a
+					>
+				</div>
+				<div>
+					<a
+						type="button"
+						class="nav-link ms-2"
+						data-bs-toggle="modal"
+						data-bs-target="#loginModal"
+						><b>Login</b></a
+					>
+				</div>
+				<% } %> <% if(currentUser){ %>
+				<a
+					type="button"
+					class="nav-link ms-2"
+					data-bs-toggle="modal"
+					data-bs-target="#exampleModal"
+				>
+					<b>profile</b>
+				</a>
+				<a class="nav-link ms-2" href="/logout"><b>Logout</b></a>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</nav>

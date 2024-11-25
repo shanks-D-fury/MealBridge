@@ -1,0 +1,11 @@
+.signUp-form {
+	width: 80%;
+	margin-left: 10%;
+	padding: 1rem;
+}
+.modal-body {
+	padding: 1rem;
+}
+.modal-content {
+	background-color: #ddeeff;
+}

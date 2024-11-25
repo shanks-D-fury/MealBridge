@@ -1,0 +1,56 @@
+<% layout("/layouts/boilerPlate.ejs") -%>
+<link rel="stylesheet" href="/users/signup.css" />
+<div class="row">
+	<div class="signUp-form col-md-4 offset-md-4 col-8 offset-2">
+		<h3 class="mb-4">Login to MealBridge</h3>
+		<form action="/login" method="post" novalidate class="needs-validation">
+			<div class="mb-3">
+				<input
+					name="username"
+					id="username"
+					type="text"
+					class="form-control"
+					placeholder="username"
+					required
+				/>
+			</div>
+			<div class="mb-3 row">
+				<div class="col-10">
+					<input
+						name="password"
+						type="password"
+						id="password"
+						placeholder="password"
+						class="form-control mb-3"
+						required
+					/>
+				</div>
+				<div class="col-2">
+					<a class="btn btn-outline-dark" id="togglePassword">
+						<i class="fa-regular fa-eye"></i>
+					</a>
+				</div>
+			</div>
+			<button class="btn btn-outline-dark" type="submit">Login</button>
+		</form>
+	</div>
+</div>
+<script>
+	document
+		.getElementById("togglePassword")
+		.addEventListener("click", function () {
+			const passwordInput = document.getElementById("password");
+			const icon = this.querySelector("i");
+
+			// Toggle the type attribute
+			if (passwordInput.type === "password") {
+				passwordInput.type = "text";
+				icon.classList.remove("fa-eye");
+				icon.classList.add("fa-eye-slash"); // Change icon when password is visible
+			} else {
+				passwordInput.type = "password";
+				icon.classList.remove("fa-eye-slash");
+				icon.classList.add("fa-eye"); // Change icon when password is hidden
+			}
+		});
+</script>

@@ -1,0 +1,166 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+main {
+	margin-top: 10px;
+}
+h2 {
+	color: white;
+}
+
+/* Card container */
+.cardcontainer {
+	display: flex;
+	background-color: rgb(0, 0, 0);
+	flex-direction: column; /* Stack the title and card vertically */
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+/* Card styling */
+.card {
+	background-color: #4caf50;
+	width: 85%; /* Card takes full width of the container */
+	height: 80%;
+	color: white;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.btn {
+	background-color: #ff0004;
+	color: #ffffff;
+	border: none;
+	padding: 10px 15px;
+	font-weight: 1000;
+	margin: 5px;
+	border-radius: 5px;
+	font-size: 15px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	text-decoration: none;
+}
+
+main > h2 {
+	font-size: xx-large;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: white;
+	text-align: center;
+}
+
+:root {
+	--navbar-height: 60px; /* Set the navbar height once */
+}
+
+body {
+	display: flex;
+	row-gap: 20px;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: black;
+}
+
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: var(--navbar-height);
+	background-color: #0056b3;
+	/* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
+	display: flex;
+	/* height:fit-content; */
+	justify-content: space-around;
+	margin-bottom: 20px;
+	align-items: center;
+	z-index: 10; /* Ensure it's above other elements */
+}
+
+h3 {
+	color: #ffffff;
+}
+.infobox p {
+	text-align: center;
+	color: #ffffff;
+}
+.infocontainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center; /* Centers items horizontally */
+	align-items: center; /* Centers items vertically */
+	width: 80vw;
+	padding: 15px;
+	gap: 20px; /* Adds space between infoboxes */
+	margin: 0 auto; /* Centers the container itself if necessary */
+}
+
+.infobox {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	row-gap: 10px;
+	align-items: center;
+	text-align: center; /* Aligns text to the center */
+}
+
+.infobox img {
+	width: 200px; /* Set a fixed width */
+	height: 200px; /* Set a fixed height */
+	object-fit: cover; /* Ensures the image maintains aspect ratio */
+	border-radius: 10px; /* Optional: add rounded corners */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add a shadow */
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 20px;
+	width: 80vw;
+	height: 80vh;
+	margin: calc(var(--navbar-height) + 20px) auto 0; /* Add space equal to navbar height */
+	background: #0056b3;
+	border-radius: 8px;
+	padding: 20px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* Ensures the image scales and crops to fit */
+	display: block; /* Removes inline spacing for images */
+}
+
+#c1 {
+	background-image: url(/images/dd1.jpg);
+	background-size: cover;
+}
+#c2 {
+	background-image: url(/images/track.jpg);
+	background-size: cover;
+}
+#c3 {
+	background-image: url(/images/reciever.jpg);
+	background-size: cover;
+}
+#c4 {
+	background-image: url(/images/fertilizer.jpg);
+	background-size: cover;
+}

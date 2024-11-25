@@ -1,0 +1,23 @@
+.alert-dismissible {
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	position: fixed;
+	z-index: 20;
+	top: 6rem;
+	border-radius: 2rem;
+	opacity: 0.75;
+}
+@media (max-width: 768px) {
+	.alert-dismissible {
+		height: 4rem;
+	}
+}
+.alert-dismissible span {
+	font-weight: 500;
+}
+@media (min-width: 992px) {
+	.alert-dismissible {
+		left: 2.5rem;
+	}
+}
