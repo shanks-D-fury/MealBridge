@@ -1,0 +1,143 @@
+<% layout("/layouts/boilerPlate.ejs") -%>
+<link rel="stylesheet" href="/users/signup.css" />
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/intl-tel-input/build/css/intlTelInput.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/intlTelInput.min.js"></script>
+<div class="row mb-3">
+	<div class="signUp-form col-md-4 offset-md-4 col-8 offset-2">
+		<h3 class="mb-3">SignUp On MealBridge</h3>
+		<form
+			action="/signup"
+			method="post"
+			id="signupForm"
+			novalidate
+			class="needs-validation"
+		>
+			<div class="mb-3">
+				<input
+					name="username"
+					id="username"
+					type="text"
+					placeholder="username"
+					class="form-control"
+					required
+				/>
+				<div class="valid-feedback">Looks good!</div>
+			</div>
+			<div class="mb-3">
+				<input
+					name="email"
+					type="email"
+					id="email"
+					placeholder="email"
+					class="form-control"
+					required
+				/>
+			</div>
+			<div class="mb-3">
+				<input
+					type="tel"
+					name="phoneNo"
+					id="phone"
+					class="form-control"
+					placeholder="98765 43210"
+					required
+				/>
+			</div>
+			<div class="mb-3">
+				<input
+					name="password"
+					type="password"
+					id="password"
+					placeholder="password"
+					class="form-control mb-3"
+					required
+				/>
+			</div>
+			<div class="mb-3 row">
+				<div class="col-10">
+					<input
+						name="confirmPassword"
+						type="password"
+						id="confirmPassword"
+						placeholder="confirm Password"
+						class="form-control mb-3"
+						required
+					/>
+					<span
+						id="passwordError"
+						class="text-danger"
+						style="visibility: hidden"
+						>Passwords do not match</span
+					>
+				</div>
+				<div class="col-2">
+					<a class="btn btn-outline-dark" id="togglePassword">
+						<i class="fa-regular fa-eye"></i>
+					</a>
+				</div>
+			</div>
+			<button class="btn btn-outline-dark mb-3" id="submitBtn">Submit</button>
+		</form>
+	</div>
+</div>
+<script>
+	const phoneInputField = document.getElementById("phone");
+	const iti = window.intlTelInput(phoneInputField, {
+		initialCountry: "in",
+		utilsScript:
+			"https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/utils.js", // for validation
+	});
+
+	document.querySelector("form").addEventListener("submit", function (e) {
+		if (!iti.isValidNumber()) {
+			e.preventDefault();
+		}
+	});
+</script>
+<script>
+	function validatePasswords() {
+		const password = document.getElementById("password").value;
+		const confirmPassword = document.getElementById("confirmPassword").value;
+		const passwordError = document.getElementById("passwordError");
+		const submitBtn = document.getElementById("submitBtn");
+
+		// Check if passwords match
+		if (password === confirmPassword) {
+			passwordError.style.visibility = "hidden";
+			submitBtn.disabled = false; // Enable the submit button
+		} else {
+			passwordError.style.visibility = "visible";
+			submitBtn.disabled = true; // Disable the submit button
+		}
+	}
+
+	// Add event listeners to both password fields to check as the user types
+	document
+		.getElementById("password")
+		.addEventListener("input", validatePasswords);
+	document
+		.getElementById("confirmPassword")
+		.addEventListener("input", validatePasswords);
+
+	// to toggle the visiblity of the password
+	document
+		.getElementById("togglePassword")
+		.addEventListener("click", function () {
+			const passwordInput = document.getElementById("confirmPassword");
+			const icon = this.querySelector("i");
+
+			// Toggle the type attribute
+			if (passwordInput.type === "password") {
+				passwordInput.type = "text";
+				icon.classList.remove("fa-eye");
+				icon.classList.add("fa-eye-slash"); // Change icon when password is visible
+			} else {
+				passwordInput.type = "password";
+				icon.classList.remove("fa-eye-slash");
+				icon.classList.add("fa-eye"); // Change icon when password is hidden
+			}
+		});
+</script>

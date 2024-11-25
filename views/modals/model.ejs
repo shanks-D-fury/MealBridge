@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/modals/model.css" />
+<div
+	class="modal fade"
+	id="exampleModal"
+	tabindex="-1"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title fs-5 ms-3" id="exampleModalLabel">
+					User Profile
+				</h2>
+			</div>
+			<div class="modal-body row align-items-center">
+				<div class="col-7 modal-body-text">
+					<% if(currentUser){ %>
+					<span>Username:- <%= currentUser.username %></span><br />
+					<span>Email:- <%= currentUser.email %></span><br />
+					<span>Email:- <%= currentUser.phoneNo %></span>
+					<% } else{%>
+					<span>User:- Unknown</span>
+					<% } %>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-outline-dark"
+					data-bs-dismiss="modal"
+				>
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
