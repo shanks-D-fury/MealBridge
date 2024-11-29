@@ -63,3 +63,40 @@ module.exports.recievePage = async (req, res) => {
 	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
 	res.render("elements/recieve.ejs", { foodbanks });
 };
+
+module.exports.fertilizerPage = async (req, res) => {
+	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
+	res.render("elements/fertilizer.ejs", { foodbanks });
+};
+
+module.exports.acceptDonation = async (req, res, next) => {
+	try {
+		let { id } = req.params;
+		const result = await FoodBank.findByIdAndUpdate(id, {
+			$set: { accepted: true },
+		});
+		req.flash("success", "Donation accepted successfully!");
+		res.redirect("/foodbank");
+	} catch (err) {
+		next(err);
+	}
+};
+
+module.exports.deleteDonation = async (req, res, next) => {
+	try {
+		let { id } = req.params;
+		const foodBank = await FoodBank.findById(id);
+		if (!foodBank) {
+			return req.flash("error", "no foodbank found");
+		}
+		const result = await Product.deleteMany({
+			_id: { $in: foodBank.products },
+		});
+		foodBank.products = [];
+		await foodBank.save();
+		req.flash("success", "ThankYou for donation");
+		res.redirect("/dashboard");
+	} catch (err) {
+		next(err);
+	}
+};

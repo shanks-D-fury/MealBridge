@@ -15,10 +15,17 @@ router
 	.get(isLoggedIn, fbController.donatePage)
 	.post(AsyncWrap(fbController.donateInfo));
 
-router.route("/foodbank").get(fbController.inventory);
+router.route("/foodbank").get(isLoggedIn, fbController.inventory);
 
 router.route("/dashboard").get(isLoggedIn, fbController.dashboard);
 
-router.route("/recieve").get(fbController.recievePage);
+router.route("/recieve").get(isLoggedIn, fbController.recievePage);
+
+router.route("/fertilizer").get(isLoggedIn, fbController.fertilizerPage);
+
+router
+	.route("/foodbank/:id")
+	.post(isLoggedIn, fbController.acceptDonation)
+	.delete(fbController.deleteDonation);
 
 module.exports = router;
