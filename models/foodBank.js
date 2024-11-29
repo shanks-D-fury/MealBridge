@@ -14,17 +14,17 @@ const foodBankSchema = new Schema({
 			ref: "product",
 		},
 	],
-	geometry: {
-		type: {
-			type: String,
-			enum: ["Point"],
-			required: true,
-		},
-		coordinates: {
-			type: [Number],
-			required: true,
-		},
-	},
+	// geometry: {
+	// 	type: {
+	// 		type: String,
+	// 		enum: ["Point"],
+	// 		required: true,
+	// 	},
+	// 	coordinates: {
+	// 		type: [Number],
+	// 		required: true,
+	// 	},
+	// },
 });
 
 module.exports = mongoose.model("FoodBank", foodBankSchema);

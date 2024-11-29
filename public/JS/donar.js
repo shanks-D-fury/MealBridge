@@ -5,13 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Function to create a product row
 	function createProductRow(index) {
 		return `
-            <div class="row product-row" id="product-${index}">
-                <hr />
+            <div class="row product-row">
                 <div class="mb-3 col-md-4">
-                    <label for="itemName-${index}" class="form-location">Item  ${index}</label>
+                    <label for="itemName-${index}" class="form-location">Item ${index}</label>
                     <input
                         id="itemName-${index}"
-                        name="itemName-${index}"
+                        name="products[${index}][itemName]"
                         placeholder=""
                         type="text"
                         class="form-control"
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <label for="quantity-${index}" class="form-country">Quantity</label>
                     <input
                         id="quantity-${index}"
-                        name="quantity-${index}"
+                        name="products[${index}][quantity]"
                         placeholder=""
                         type="text"
                         class="form-control"
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <label for="expiresAt-${index}" class="form-country">Expires At</label>
                     <input
                         id="expiresAt-${index}"
-                        name="expiresAt-${index}"
+                        name="products[${index}][expireDate]"
                         type="date"
                         class="form-control"
                         required
