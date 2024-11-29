@@ -15,6 +15,7 @@ const mongo_url = "mongodb://127.0.0.1:27017/MealBridge";
 const User = require("./models/user.js");
 const ExpressError = require("./utils/ExpressError.js");
 const userRouter = require("./routes/user.js");
+const fbRouter = require("./routes/foodbank.js");
 const { isLoggedIn } = require("./utils/Middlewares.js");
 
 // // FROM HERE
@@ -48,8 +49,8 @@ app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(cookieParser());
 app.use(session(sessionOptions));
@@ -83,15 +84,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", userRouter);
+app.use("/", fbRouter);
 
 //dashboard
 app.get("/dashboard", isLoggedIn, (req, res) => {
 	res.render("elements/dashboard.ejs");
-});
-
-//donate route
-app.get("/donate", (req, res) => {
-	res.render("elements/donar.ejs");
 });
 
 //food bank

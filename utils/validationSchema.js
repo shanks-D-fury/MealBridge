@@ -3,7 +3,6 @@ const Joi = require("joi");
 module.exports.foodBankSchema = Joi.object({
 	FoodBank: Joi.object({
 		title: Joi.string().required(),
-		description: Joi.string().required(),
 		location: Joi.string().required(),
 		country: Joi.string().required(),
 	}).required(),
