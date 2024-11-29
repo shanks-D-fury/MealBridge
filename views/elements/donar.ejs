@@ -16,9 +16,11 @@
 						<label for="category" class="form-category">FoodBank</label>
 						<select name="fbId" class="form-select" required>
 							<option aria-selected="false">Select FoodBank</option>
+
 							<% for(let fb of foodbanks){ %>
 							<option value="<%= fb._id %>"><%= fb.title %></option>
 							<% } %>
+
 						</select>
 					</div>
 					<div class="mb-2 col-md-6">
