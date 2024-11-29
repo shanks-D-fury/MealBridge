@@ -58,3 +58,8 @@ module.exports.inventory = async (req, res) => {
 module.exports.dashboard = (req, res) => {
 	res.render("elements/dashboard.ejs");
 };
+
+module.exports.recievePage = async (req, res) => {
+	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
+	res.render("elements/recieve.ejs", { foodbanks });
+};

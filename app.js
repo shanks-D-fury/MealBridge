@@ -88,16 +88,6 @@ app.get("/", (req, res) => {
 app.use("/", userRouter);
 app.use("/", fbRouter);
 
-//expired food page link
-app.get("/expired", (req, res) => {
-	res.send("expired food page");
-});
-
-//one more link
-app.get("/one_more", (req, res) => {
-	res.send("one more link");
-});
-
 //error handlings
 app.all("*", (req, res, next) => {
 	next(new ExpressError(404, "Page Not Found!"));
