@@ -95,6 +95,10 @@ app.get("/expired", (req, res) => {
 app.get("/one_more", (req, res) => {
 	res.send("one more link");
 });
+//fertilizer root
+app.get("/fertilizer", (req, res) => {
+	res.render("elements/fertilizer.ejs");
+});
 
 //error handlings
 app.all("*", (req, res, next) => {
