@@ -17,6 +17,8 @@ const ExpressError = require("./utils/ExpressError.js");
 const userRouter = require("./routes/user.js");
 const fbRouter = require("./routes/foodbank.js");
 const { isLoggedIn } = require("./utils/Middlewares.js");
+const cron = require("node-cron");
+const markExpiredProducts = require("./utils/updateExpired.js");
 
 // // FROM HERE
 // const store = MongoStore.create({
@@ -67,6 +69,11 @@ main()
 		console.log("Mongo DB Connection Successful");
 	})
 	.catch((err) => console.log(err));
+
+cron.schedule("0 * * * *", async () => {
+	console.log("Running daily expiration check...");
+	await markExpiredProducts();
+});
 
 async function main() {
 	await mongoose.connect(mongo_url);

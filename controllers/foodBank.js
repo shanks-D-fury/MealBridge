@@ -93,8 +93,9 @@ module.exports.deleteDonation = async (req, res, next) => {
 			_id: { $in: foodBank.products },
 		});
 		foodBank.products = [];
+		foodBank.accepted = false;
 		await foodBank.save();
-		req.flash("success", "ThankYou for donation");
+		req.flash("success", "ThankYou for receving !");
 		res.redirect("/dashboard");
 	} catch (err) {
 		next(err);
