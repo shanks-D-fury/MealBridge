@@ -14,6 +14,7 @@ const foodBankSchema = new Schema({
 			ref: "Product",
 		},
 	],
+	accepted: { type: Boolean, default: false },
 	// geometry: {
 	// 	type: {
 	// 		type: String,

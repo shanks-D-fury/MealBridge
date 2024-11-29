@@ -16,6 +16,10 @@ const productSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "User",
 	},
+	expired: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 module.exports = mongoose.model("Product", productSchema);

@@ -80,9 +80,11 @@ app.use((req, res, next) => {
 
 //home route
 app.get("/", (req, res) => {
+	if (req.user) {
+		return res.redirect("/dashboard");
+	}
 	res.render("elements/index.ejs");
 });
-
 app.use("/", userRouter);
 app.use("/", fbRouter);
 

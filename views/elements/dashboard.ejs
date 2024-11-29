@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="/elements/dashboard.css" />
 <link rel="stylesheet" href="/elements/style.css" />
 <body>
-	<%- include("../modals/model.ejs") %>
+	<%- include("../modals/model.ejs") %> <%- include("../modals/adminModal.ejs")
+	%>
 	<main>
 		<section>
 			<div class="grid-container">
@@ -13,7 +14,13 @@
 							<img src="/images/dd1.jpg" alt="" />
 						</div></div
 				></a>
-				<a href="/foodbank" style="text-decoration: none">
+				<a
+					class="button"
+					type="button"
+					data-bs-toggle="modal"
+					data-bs-target="#adminModal"
+					style="text-decoration: none"
+				>
 					<div class="cardcontainer">
 						<h2>Track Inventory</h2>
 						<div class="card" id="c2">
@@ -51,8 +58,8 @@
 					<div class="card-body">
 						<h2 class="card-title">Enhanced Inventory Management</h2>
 						<div class="card-text">
-
-							Implemented Real Time tracking system to manage food items,expiration dates,reducing wastes efficiently
+							Implemented Real Time tracking system to manage food
+							items,expiration dates,reducing wastes efficiently
 						</div>
 					</div>
 				</div>
@@ -64,7 +71,8 @@
 					<div class="card-body">
 						<h2 class="card-title">Optimised Food Donation Process</h2>
 						<div class="card-text">
-							Developed matching algorithem to connect surplus food with nearby food banks based on needs and capacity
+							Developed matching algorithem to connect surplus food with nearby
+							food banks based on needs and capacity
 						</div>
 					</div>
 				</div>
@@ -75,7 +83,8 @@
 					<div class="card-body">
 						<h2 class="card-title">Improved Communication System</h2>
 						<div class="card-text">
-							Established secure messaging for direct communication between restrautants and food banks ensuring timely reponses
+							Established secure messaging for direct communication between
+							restrautants and food banks ensuring timely reponses
 						</div>
 					</div>
 				</div>

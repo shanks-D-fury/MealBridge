@@ -1,4 +1,7 @@
 const User = require("../models/user.js");
+if (process.env.NODE_ENV != "production") {
+	require("dotenv").config();
+}
 
 module.exports.signUpFormRender = async (req, res) => {
 	res.render("users/signup.ejs");
@@ -41,4 +44,16 @@ module.exports.logout = (req, res, next) => {
 		req.flash("success", "Logged Out Succesfully!");
 		res.redirect("/");
 	});
+};
+
+module.exports.adminLogin = (req, res) => {
+	let { password } = req.body;
+	console.log(password, " ", process.env.ADMIN_PASSWORD);
+	if (password == process.env.ADMIN_PASSWORD) {
+		req.flash("success", "Admin LoggedIn Succesfully!");
+		res.redirect("/foodbank");
+	} else {
+		req.flash("error", "Wrong Admin Password");
+		res.redirect("/dashboard");
+	}
 };
