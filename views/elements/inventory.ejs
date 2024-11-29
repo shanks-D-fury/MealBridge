@@ -5,7 +5,8 @@
 		<h2>Available Donations</h2>
 		<div class="row">
 			<div class="col-md-8">
-				<% for(let fb of foodbanks) {%> <% if(fb.products.length!=0){ %>
+				<% for(let fb of foodbanks) {%> <% if(fb.products.length!=0 &&
+				!fb.accepted){ %>
 				<div class="card p-4 mb-3">
 					<div class="d-flex justify-content-between mt-3 custom-borders">
 						<div>
@@ -16,14 +17,16 @@
 						</div>
 						<div class="text-end">
 							<br />
-							<% for(let product of fb.products){ %>
-							<p><%=product.quantity %></p>
+							<% for (let product of fb.products) { %>
+							<p><%= product.quantity %></p>
 							<% } %>
-							<button class="btn btn-success">Accept Donation</button>
+							<form action="/foodbank/<%= fb._id %>" method="POST">
+								<button class="btn btn-success">Accept Donation</button>
+							</form>
 						</div>
 					</div>
 				</div>
-				<% } %> <% } %>
+				<% }%> <% } %>
 			</div>
 			<div class="col-md-4">
 				<div class="quick-stats">
@@ -34,7 +37,7 @@
 								<p>Total Donations</p>
 							</div>
 							<div>
-								<span>123t</span>
+								<span>123kg</span>
 								<p>Food Saved</p>
 							</div>
 						</div>
