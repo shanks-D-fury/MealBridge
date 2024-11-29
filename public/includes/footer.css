@@ -24,6 +24,7 @@
 .f-info-name {
 	display: flex;
 	justify-content: center;
+	color:blue;
 }
 .f-info-links {
 	display: flex;
@@ -39,7 +40,7 @@
 }
 .f-info-socialMedia a i {
 	margin-left: 1rem;
-	color: #dee2e6;
+	color: blue;
 }
 .f-info-socialMedia a {
 	text-decoration: none;
