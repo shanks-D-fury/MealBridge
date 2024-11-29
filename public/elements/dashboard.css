@@ -7,8 +7,10 @@ main {
 	margin-top: 10px;
 }
 
+
 body{
 	background: linear-gradient(skyblue,lightgreen);
+	box-sizing: border-box;
 }
 h2 {
 	color: white;
@@ -17,7 +19,7 @@ h2 {
 	border: 5px solid white;
 	border-radius: 10px;
     padding:5px;
-	margin-right: 5px;
+	margin-right: 50px;
 }
 
 /* Card container */
@@ -63,6 +65,15 @@ h2 {
   top: 0; /* Aligns the image with the top of the container */
   left: 0; /* Aligns the image with the left of the container */
 }
+
+.card-group{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.container{
+	width: 100vw;
+}
   
 
 .card:hover {
@@ -92,6 +103,7 @@ h2 {
 } */
 
 .cardcontainer{
+	background: linear-gradient(to right,lightgreen,skyblue);
 	border: 5px solid white;
 	border-radius: 10px;
 
@@ -114,6 +126,7 @@ h2 {
 
 body {
 	display: flex;
+	overflow-x: hidden;
 	
 	row-gap: 20px;
 	width: 100%;
@@ -121,7 +134,7 @@ body {
 	margin: 0;
 	padding: 0px;
 	box-sizing: border-box;
-	background-color: black;
+	/* background-color: black; */
 }
 
 .navbar {
@@ -150,10 +163,9 @@ h3 {
 }
 .container {
 	display: flex;
-
 	justify-content: center; /* Centers items horizontally */
 	align-items: center; /* Centers items vertically */
-	width: 80vw;
+	width: 100vw;
 	padding: 15px;
 	gap: 20px; /* Adds space between infoboxes */
 	margin: 0 auto; /* Centers the container itself if necessary */
@@ -190,7 +202,8 @@ h3 {
 	/* background: #0056b3; */
 	border-radius: 8px;
 	padding: 20px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+	/* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 
