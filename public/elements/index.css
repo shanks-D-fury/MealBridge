@@ -224,6 +224,10 @@ p {
 	flex-wrap: wrap; /* Wrap for smaller screens */
 }
 
+.content p{
+	color: black;
+}
+
 .widget {
 	border: #ffffff;
 	border-radius: 20px;
