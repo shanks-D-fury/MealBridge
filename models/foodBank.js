@@ -11,7 +11,7 @@ const foodBankSchema = new Schema({
 	products: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: "product",
+			ref: "Product",
 		},
 	],
 	// geometry: {
