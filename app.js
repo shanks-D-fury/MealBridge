@@ -80,25 +80,13 @@ app.use((req, res, next) => {
 
 //home route
 app.get("/", (req, res) => {
+	if (req.user) {
+		return res.redirect("/dashboard");
+	}
 	res.render("elements/index.ejs");
 });
-
 app.use("/", userRouter);
 app.use("/", fbRouter);
-
-//expired food page link
-app.get("/expired", (req, res) => {
-	res.send("expired food page");
-});
-
-//one more link
-app.get("/one_more", (req, res) => {
-	res.send("one more link");
-});
-//fertilizer root
-app.get("/fertilizer", (req, res) => {
-	res.render("elements/fertilizer.ejs");
-});
 
 //error handlings
 app.all("*", (req, res, next) => {

@@ -19,4 +19,6 @@ router.route("/foodbank").get(fbController.inventory);
 
 router.route("/dashboard").get(isLoggedIn, fbController.dashboard);
 
+router.route("/recieve").get(fbController.recievePage);
+
 module.exports = router;
