@@ -49,3 +49,12 @@ module.exports.donateInfo = async (req, res, next) => {
 		next(err);
 	}
 };
+
+module.exports.inventory = async (req, res) => {
+	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
+	res.render("elements/inventory.ejs", { foodbanks });
+};
+
+module.exports.dashboard = (req, res) => {
+	res.render("elements/dashboard.ejs");
+};

@@ -5,25 +5,26 @@
 		<h2>Available Donations</h2>
 		<div class="row">
 			<div class="col-md-8">
+				<% for(let fb of foodbanks) {%> <% if(fb.products.length!=0){ %>
 				<div class="card p-4 mb-3">
 					<div class="d-flex justify-content-between mt-3 custom-borders">
 						<div>
-							<h5>
-								Donation #123 <span class="badge badge-pending">coming</span>
-							</h5>
-							<p>Fresh Bread</p>
-							<p>Rice</p>
-							<p>1.5 miles away</p>
+							<h5><%=fb.title %></h5>
+							<% for(let product of fb.products){ %>
+							<p><%=product.itemName %></p>
+							<% } %>
 						</div>
 
 						<div class="text-end">
-							<p><i class="fas fa-clock"></i> Nov 19, 9:31 PM</p>
-							<p>20 loaves</p>
-							<p>5 kg</p>
+							<br />
+							<% for(let product of fb.products){ %>
+							<p><%=product.quantity %></p>
+							<% } %>
 							<button class="btn btn-success">Accept Donation</button>
 						</div>
 					</div>
 				</div>
+				<% } %> <% } %>
 			</div>
 			<div class="col-md-4">
 				<div class="quick-stats">

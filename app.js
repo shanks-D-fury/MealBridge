@@ -86,16 +86,6 @@ app.get("/", (req, res) => {
 app.use("/", userRouter);
 app.use("/", fbRouter);
 
-//dashboard
-app.get("/dashboard", isLoggedIn, (req, res) => {
-	res.render("elements/dashboard.ejs");
-});
-
-//food bank
-app.get("/foodbank", (req, res) => {
-	res.render("elements/inventory.ejs");
-});
-
 //expired food page link
 app.get("/expired", (req, res) => {
 	res.send("expired food page");

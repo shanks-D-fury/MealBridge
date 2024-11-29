@@ -15,4 +15,8 @@ router
 	.get(isLoggedIn, fbController.donatePage)
 	.post(AsyncWrap(fbController.donateInfo));
 
+router.route("/foodbank").get(fbController.inventory);
+
+router.route("/dashboard").get(isLoggedIn, fbController.dashboard);
+
 module.exports = router;
