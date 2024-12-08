@@ -18,6 +18,24 @@ label {
 .row textarea::placeholder {
 	opacity: 0.5;
 }
+#map-container {
+	position: relative;
+	display: none;  
+	border-radius: 0.4rem;
+}
+#map {
+	height: 400px;
+	width: 100%;
+	border: 1px solid #090101;
+	border-radius: 0.4rem;
+
+}
+#choose-location-btn{
+	padding:0.2rem;
+	background-color: rgb(75, 154, 75);
+	border-radius: 0.4rem;
+	margin:0.4rem;
+}
 
 /* @media (max-width: 768px) {
 	.form-select {
