@@ -12,10 +12,6 @@ const productSchema = new Schema({
 			return date;
 		},
 	},
-	donar: {
-		type: Schema.Types.ObjectId,
-		ref: "User",
-	},
 	expired: {
 		type: Boolean,
 		default: false,

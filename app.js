@@ -106,5 +106,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(8080, "0.0.0.0", () => {
-	console.log("ComfortNest Listening {Port: 8080}");
+	console.log("MealBridge Listening {Port: 8080}");
 });
