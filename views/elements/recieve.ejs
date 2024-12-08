@@ -11,20 +11,21 @@
 					<div class="d-flex justify-content-between mt-3 custom-borders">
 						<div>
 							<h5><%=fb.title %></h5>
-							<% for(let product of fb.products){ %>
+							<% for(let product of fb.products){ %> <% if(!product.expired){ %>
 							<p><%=product.itemName %></p>
-							<% } %>
+							<% } %> <% } %>
 						</div>
 						<div class="text-end">
 							<br />
-							<% for (let product of fb.products) { %>
+							<% for (let product of fb.products) { %> <% if(!product.expired){
+							%>
 							<p><%= product.quantity %></p>
-							<% } %>
+							<% } %> <% } %>
 							<form
-								action="/foodbank/<%= fb._id %>?_method=DELETE"
+								action="/foodbank/<%= fb._id %>?_method=delete"
 								method="POST"
 							>
-								<button class="btn btn-success">Accept Donation</button>
+								<button class="btn btn-success">Book</button>
 							</form>
 						</div>
 					</div>
