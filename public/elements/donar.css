@@ -18,28 +18,90 @@ label {
 .row textarea::placeholder {
 	opacity: 0.5;
 }
-#map-container {
-	position: relative;
-	display: none;  
-	border-radius: 0.4rem;
-}
-#map {
-	height: 400px;
-	width: 100%;
-	border: 1px solid #090101;
-	border-radius: 0.4rem;
+     /* Map container hidden initially */
+	 #map-container {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 70vw;  /* 70% of viewport width */
+		height: 70vh; /* 70% of viewport height */
+		display: none;  /* Hidden by default */
+		border-radius: 0.4rem;
+		z-index: 9999;
+		background-color: white; /* Optional, for better visibility */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	}
 
-}
+	/* Map styling */
+	#map {
+		width: 100%;
+		height: 100%;
+		border: 1px solid #090101;
+		border-radius: 0.4rem;
+	}
+
+	
 #choose-location-btn{
-	padding:0.2rem;
-	background-color: rgb(75, 154, 75);
+	padding: 0.5rem;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
 	border-radius: 0.4rem;
-	margin:0.4rem;
 }
 
-/* @media (max-width: 768px) {
-	.form-select {
+/* Custom button style for search */
+.leaflet-control-geocoder button{
+	background-color: green;
+	border: none;
+	width: 2.5rem;
+	height: 2.5rem;
+	background-size: 1.4rem;
+	border: 2px solid wheat;
+	border-radius: 0.7rem;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	cursor: pointer;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-control-geocoder{
+
+	width: fit-content;
+	height: fit-content;
+	padding: 0.5rem;
+	font-size: large;	
+}
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+    display: none; /* Hidden initially */
+    z-index: 10; /* Ensure it is above other content */
+}
+
+
+
+
+@media (max-width: 768px) {
+	/* .form-select {
 		width: 70%;
 		font-size: 12.5px;
+	} */
+
+	
+	#map{
+		width: 70vw;  /* 70% of viewport width */
+		height: 50vh; /* 70% of viewport height */
 	}
-} */
+	#map-container{
+		width: 70vw;  /* 70% of viewport width */
+		height: 50vh; /* 70% of viewport height */
+	}
+}

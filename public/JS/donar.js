@@ -107,16 +107,22 @@ document.addEventListener("DOMContentLoaded", () => {
  // References to elements
  const mapContainer = document.getElementById('map-container');
  const chooseLocationBtn = document.getElementById('choose-location-btn');
+ const overlay = document.getElementById('overlay');
 
  // Toggle map visibility on button click
  chooseLocationBtn.addEventListener('click', () => {
      mapContainer.style.display = 'block'; // Show the map
      map.invalidateSize(); // Ensure map renders correctly
+     chooseLocationBtn.style.display="none";
+     overlay.style.display = 'block'; // Show the overlay
  });
 
  // Hide map when clicking outside
  document.addEventListener('click', (event) => {
      if (!mapContainer.contains(event.target) && event.target !== chooseLocationBtn) {
          mapContainer.style.display = 'none'; // Hide the map
+         chooseLocationBtn.style.display="block";
+         overlay.style.display = 'none'; 
      }
+
  });
