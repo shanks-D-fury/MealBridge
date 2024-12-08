@@ -22,7 +22,7 @@ module.exports.donateInfo = async (req, res, next) => {
 	try {
 		const { products, latitude, longitude } = req.body;
 		const coordinates = [Number(longitude), Number(latitude)];
-		console.log(coordinates);
+		// console.log(coordinates);
 		const parsedProducts =
 			typeof products === "string" ? JSON.parse(products) : products;
 

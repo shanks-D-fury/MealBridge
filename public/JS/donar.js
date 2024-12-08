@@ -75,9 +75,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // Display initial location
 const displayLocation = (lat, lng) => {
-	document.getElementById(
-		"location-details"
-	).innerText = `Latitude: ${lat}, Longitude: ${lng}`;
 	document.getElementById("latitude").value = lat;
 	document.getElementById("longitude").value = lng;
 };
@@ -87,7 +84,6 @@ displayLocation(77.7140693, 12.9677017);
 marker.on("dragend", function () {
 	const position = marker.getLatLng();
 	displayLocation(position.lat, position.lng);
-	console.log(`${position.lat},${position.lng}`);
 });
 
 // Allow users to click on the map to update the marker's position
@@ -95,8 +91,6 @@ map.on("click", function (event) {
 	const { lat, lng } = event.latlng;
 	marker.setLatLng([lat, lng]); // Move the marker
 	displayLocation(lat, lng); // Update location details
-	console.log(`${lat},${lng}`);
-	req.body.coordinates = [lng, lat];
 });
 // Add the search control (Leaflet Control Geocoder)
 L.Control.geocoder({
