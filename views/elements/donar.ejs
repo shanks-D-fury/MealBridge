@@ -1,9 +1,15 @@
 <% layout("/layouts/boilerPlateNew.ejs") -%>
 <link rel="stylesheet" href="/elements/donar.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+<link
+	rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<link
+	rel="stylesheet"
+	href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+/>
 <body>
 	<div class="row">
 		<div class="col-8 offset-2">
@@ -15,17 +21,10 @@
 				class="needs-validation"
 				id="productForm"
 			>
+				<!-- Hidden fields for latitude and longitude -->
+				<input type="hidden" name="latitude" id="latitude" />
+				<input type="hidden" name="longitude" id="longitude" />
 				<div class="row mb-3">
-					<div class="col-md-6">
-						<label for="category" class="form-category">FoodBank</label>
-						<select name="fbId" class="form-select" required>
-							<option aria-selected="false">Select FoodBank</option>
-
-							<% for(let fb of foodbanks){ %>
-							<option value="<%= fb._id %>"><%= fb.title %></option>
-							<% } %>
-						</select>
-					</div>
 					<div class="mb-2 col-md-6">
 						<label for="price" class="form-price">No of Items</label>
 						<input
@@ -41,20 +40,18 @@
 					</div>
 				</div>
 				<div id="productRows"></div>
-
-                <section>
+				<section>
 					<button id="choose-location-btn">
-						<img src="images/mapicon.svg" alt="">
+						<img src="images/mapicon.svg" alt="" />
 						Choose Location
 					</button>
 					<div id="overlay"></div>
-                    <div id="map-container">
-                     <div id="map"></div>
-                    </div>
-                    <p id="location-details"></p>
+					<div id="map-container">
+						<div id="map"></div>
+					</div>
+					<p id="location-details"></p>
 				</section>
 				<hr />
-				
 				<button class="btn btn-success">Submit</button>
 			</form>
 		</div>

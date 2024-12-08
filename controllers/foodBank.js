@@ -20,7 +20,9 @@ module.exports.donatePage = async (req, res, next) => {
 
 module.exports.donateInfo = async (req, res, next) => {
 	try {
-		const { products } = req.body;
+		const { products, latitude, longitude } = req.body;
+		const coordinates = [Number(longitude), Number(latitude)];
+		console.log(coordinates);
 		const parsedProducts =
 			typeof products === "string" ? JSON.parse(products) : products;
 
@@ -33,7 +35,8 @@ module.exports.donateInfo = async (req, res, next) => {
 		);
 
 		const productIds = createdProducts.map((product) => product._id);
-		const newPackage = new Package({ donar: req.user._id });
+		const geometry = { coordinates, type: "Point" };
+		const newPackage = new Package({ donar: req.user._id, geometry });
 		newPackage.products.push(...productIds);
 		await newPackage.save();
 
