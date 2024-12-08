@@ -15,7 +15,7 @@ const mongo_url = "mongodb://127.0.0.1:27017/MealBridge";
 const User = require("./models/user.js");
 const ExpressError = require("./utils/ExpressError.js");
 const userRouter = require("./routes/user.js");
-const fbRouter = require("./routes/foodbank.js");
+const fbRouter = require("./routes/foodBank.js");
 const { isLoggedIn } = require("./utils/Middlewares.js");
 
 // // FROM HERE
