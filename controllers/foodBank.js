@@ -20,7 +20,9 @@ module.exports.donatePage = async (req, res, next) => {
 
 module.exports.donateInfo = async (req, res, next) => {
 	try {
-		const { products } = req.body;
+		const { products, latitude, longitude } = req.body;
+		const coordinates = [Number(longitude), Number(latitude)];
+		// console.log(coordinates);
 		const parsedProducts =
 			typeof products === "string" ? JSON.parse(products) : products;
 
@@ -33,7 +35,8 @@ module.exports.donateInfo = async (req, res, next) => {
 		);
 
 		const productIds = createdProducts.map((product) => product._id);
-		const newPackage = new Package({ donar: req.user._id });
+		const geometry = { coordinates, type: "Point" };
+		const newPackage = new Package({ donar: req.user._id, geometry });
 		newPackage.products.push(...productIds);
 		await newPackage.save();
 
@@ -54,12 +57,16 @@ module.exports.dashboard = (req, res) => {
 };
 
 module.exports.recievePage = async (req, res) => {
-	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
-	res.render("elements/recieve.ejs", { foodbanks });
+	const packages = await Package.find({})
+		.populate({ path: "products" })
+		.populate({ path: "donar" });
+	res.render("elements/recieve.ejs", { packages });
 };
 
 module.exports.fertilizerPage = async (req, res) => {
-	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
+	const foodbanks = await FoodBank.find({})
+		.populate({ path: "products" })
+		.populate({ path: "donar" });
 	res.render("elements/fertilizer.ejs", { foodbanks });
 };
 

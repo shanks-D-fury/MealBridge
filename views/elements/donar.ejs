@@ -1,9 +1,15 @@
 <% layout("/layouts/boilerPlateNew.ejs") -%>
 <link rel="stylesheet" href="/elements/donar.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+<link
+	rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<link
+	rel="stylesheet"
+	href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+/>
 <body>
 	<div class="row">
 		<div class="col-8 offset-2">
@@ -16,16 +22,6 @@
 				id="productForm"
 			>
 				<div class="row mb-3">
-					<div class="col-md-6">
-						<label for="category" class="form-category">FoodBank</label>
-						<select name="fbId" class="form-select" required>
-							<option aria-selected="false">Select FoodBank</option>
-
-							<% for(let fb of foodbanks){ %>
-							<option value="<%= fb._id %>"><%= fb.title %></option>
-							<% } %>
-						</select>
-					</div>
 					<div class="mb-2 col-md-6">
 						<label for="price" class="form-price">No of Items</label>
 						<input
@@ -40,68 +36,24 @@
 						<div class="invalid-feedback">Please enter valid Number</div>
 					</div>
 				</div>
-				<div id="productRows"></div>
-
-                <section>
+				<!-- Hidden fields for latitude and longitude -->
+				<input type="hidden" name="latitude" id="latitude" />
+				<input type="hidden" name="longitude" id="longitude" />
+				<section>
 					<button id="choose-location-btn">
-						<img src="images/mapicon.svg" alt="">
+						<img src="images/mapicon.svg" alt="" />
 						Choose Location
 					</button>
 					<div id="overlay"></div>
-                    <div id="map-container">
-                     <div id="map"></div>
-                    </div>
-                    <p id="location-details"></p>
+					<div id="map-container">
+						<div id="map"></div>
+					</div>
 				</section>
+				<div id="productRows" class="mt-2"></div>
 				<hr />
-				
 				<button class="btn btn-success">Submit</button>
 			</form>
 		</div>
 	</div>
 	<script src="/JS/donar.js"></script>
 </body>
-<!-- <script>
-	document
-		.getElementById("productForm")
-		.addEventListener("submit", async (e) => {
-			e.preventDefault();
-
-			const productRowsContainer = document.getElementById("productRows");
-			const productRows =
-				productRowsContainer.getElementsByClassName("product-row");
-
-			const products = Array.from(productRows).map((row) => {
-				const itemName = row.querySelector("[id^='itemName']").value;
-				const quantity = row.querySelector("[id^='quantity']").value;
-				const expireDate = row.querySelector("[id^='expiresAt']").value;
-
-				return { itemName, quantity, expireDate };
-			});
-
-			const form = e.target;
-			const formData = new FormData(form);
-			formData.append("products", JSON.stringify(products));
-			console.log(
-				"FormData being sent:",
-				Object.fromEntries(formData.entries())
-			);
-
-			try {
-				const response = await fetch(form.action, {
-					method: "POST",
-					body: formData,
-				});
-				const data = await response.json();
-				console.log("Success:", data);
-				window.location.href = "/dashboard";
-			} catch (err) {
-				console.error("Error:", err);
-			}
-		});
-</script> -->
-
-<!-- <h2>
-	.then((data) => { console.log("Success:", data); location.href = `/dashboard`;
-	})
-</h2> -->
