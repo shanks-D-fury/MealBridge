@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Donation Accepted</title>
+</head>
+<body>
+  <p>Dear <%= individualName %>,</p>
+  <p>This mail is sent to inform you that your donation has been successfully accepted by <%= foodbankName %>.<p>
+
+  <p>Products Details:</p>
+  <% products.forEach(product => { %>
+    <p><%= product.name %> - <%= product.quantity %></p>
+  <% }); %>
+
+  <p>Thanks for donating food!</p>
+  <p>Thanks & Regards,</p>
+  <p>MealBridge</p>
+  <p><%= senderEmail %></p>
+</body>
+</html>
