@@ -1,10 +1,11 @@
-<link rel="stylesheet" href="/listings/map.css" />
+<link rel="stylesheet" href="/elements/map.css" />
 <div
 	class="modal fade"
 	id="mapModal"
-	tabindex="-1"
+	tabindex="-<%=index %>"
 	aria-labelledby="mapModalLabel"
 	aria-hidden="true"
+	inert
 >
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -14,11 +15,12 @@
 				</h2>
 			</div>
 			<div class="modal-body row align-items-center">
-				<div class="col-11 col-sm-12 tab-border special-tab-border">
+				<div class="col-11 col-sm-12 tab-border special-tab-border row">
 					<h4>Where you'll be</h4>
 					<div
-						id="map"
+						id="map<%=index %>"
 						class="package-item col"
+						data-index="<%=index %>"
 						data-package="<%= JSON.stringify(package) %>"
 					></div>
 				</div>
@@ -35,7 +37,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	const mapToken = "<%= process.env.MAP_TOKEN %>"; // this is to pass the process.env as a global variable
-</script>

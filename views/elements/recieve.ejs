@@ -6,44 +6,60 @@
 		<h2>Available Donations</h2>
 		<div class="row">
 			<div class="col-md-8">
-				<% for(let package of packages) {%> <% if( !package.accepted){ %>
-					<div class="card p-4 mb-3">
-						<!-- Username and Info Icon -->
-						<div class="d-flex justify-content-between align-items-center mt-3">
-							<div class="user-name-info">
-								<h5 class="mb-0"><%= package.donar.username %></h5>
-							</div>
-							<i class="fa-solid fa-circle-info"></i>
+				<% let index=1; %> <% for(const package of packages) {%> <% if(
+				!package.accepted){ %>
+				<div class="card p-4 mb-3">
+					<!-- Username and Info Icon -->
+					<%- include("../elements/map.ejs", { package: package ,index:index})
+					%> <% index++; %>
+					<div class="d-flex justify-content-between align-items-center mt-3">
+						<div class="user-name-info">
+							<h5 class="mb-0"><%= package.donar.username %></h5>
 						</div>
-					
-						<!-- Item Names and Quantities -->
-						<div class="d-flex justify-content-between mt-3">
-							<div>
-								<% for (let product of package.products) { %> 
-									<% if (!product.expired) { %>
-										<p class="mb-1"><%= product.itemName %></p>
-									<% } %>
-								<% } %>
-							</div>
-							<div class="text-end">
-								<% for (let product of package.products) { %> 
-									<% if (!product.expired) { %>
-										<p class="mb-1"><%= product.quantity %></p>
-									<% } %>
-								<% } %>
-							</div>
+						<a
+							class="button"
+							type="button"
+							data-bs-toggle="modal"
+							data-bs-target="#mapModal"
+							aria-controls="mapModal"
+							aria-expanded="false"
+							style="text-decoration: none"
+							><i class="fa-solid fa-circle-info"></i
+						></a>
+					</div>
+					<!-- Item Names and Quantities -->
+					<div class="d-flex justify-content-between mt-3">
+						<div>
+							<% for (let product of package.products) { %> <% if
+							(!product.expired) { %>
+							<p class="mb-1"><%= product.itemName %></p>
+							<% } %> <% } %>
 						</div>
-					
-						<!-- Submit Button -->
-						<div class="text-end mt-3">
-							<form action="/foodbank/<%= package._id %>?_method=delete" method="POST">
-								<button class="btn btn-success">Book</button>
-							</form>
+						<div class="text-end">
+							<% for (let product of package.products) { %> <% if
+							(!product.expired) { %>
+							<p class="mb-1"><%= product.quantity %></p>
+							<% } %> <% } %>
 						</div>
 					</div>
-					
+
+					<!-- Submit Button -->
+					<div class="text-end mt-3">
+						<form
+							action="/foodbank/<%= package._id %>?_method=delete"
+							method="POST"
+						>
+							<button class="btn btn-success">Book</button>
+						</form>
+					</div>
+				</div>
+
 				<% }%> <% } %>
 			</div>
 		</div>
 	</div>
 </body>
+<script>
+	const mapToken = "<%= process.env.MAP_TOKEN %>"; // this is to pass the process.env as a global variable
+</script>
+<script src="/JS/map.js"></script>
