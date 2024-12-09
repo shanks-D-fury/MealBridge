@@ -4,29 +4,14 @@
 <body>
 	<div class="container">
 		<h2>Available Donations</h2>
-		<div class="row">
-			<div class="col-md-8">
-				<% let index=1; %> <% for(const package of packages) {%> <% if(
-				!package.accepted){ %>
+		<div class="row row-col-xxl-2 recieve-container">
+			<% let index=1; %> <% for(const package of packages) {%> <% if(
+			!package.accepted){ %>
+			<div class="col-md-6">
 				<div class="card p-4 mb-3">
 					<!-- Username and Info Icon -->
-					<%- include("../elements/map.ejs", { package: package ,index:index})
-					%> <% index++; %>
-					<div class="d-flex justify-content-between align-items-center mt-3">
-						<div class="user-name-info">
-							<h5 class="mb-0"><%= package.donar.username %></h5>
-						</div>
-						<a
-							class="button"
-							type="button"
-							data-bs-toggle="modal"
-							data-bs-target="#mapModal"
-							aria-controls="mapModal"
-							aria-expanded="false"
-							style="text-decoration: none"
-							><i class="fa-solid fa-circle-info"></i
-						></a>
-					</div>
+					<%- include("../elements/map.ejs", {package ,index}) %> <% index++; %>
+					<h5 class="mb-0"><%= package.donar.username %></h5>
 					<!-- Item Names and Quantities -->
 					<div class="d-flex justify-content-between mt-3">
 						<div>
@@ -53,9 +38,8 @@
 						</form>
 					</div>
 				</div>
-
-				<% }%> <% } %>
 			</div>
+			<% }%> <% } %>
 		</div>
 	</div>
 </body>

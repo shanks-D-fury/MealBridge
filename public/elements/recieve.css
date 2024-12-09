@@ -29,8 +29,12 @@ div .mb-1 {
 .d-flex {
 	gap: 15px; /* Adds spacing between items in flexbox */
 }
-#map {
-	height: 45vh;
+.map {
+	height: 25vh;
+	width: 20% !important;
 	border: 1px solid rgba(0, 0, 0, 0.378);
 	border-radius: 1rem;
+}
+.recieve-container {
+	display: flex;
 }

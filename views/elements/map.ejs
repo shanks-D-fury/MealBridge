@@ -1,39 +1,9 @@
 <link rel="stylesheet" href="/elements/map.css" />
-<div
-	class="modal fade"
-	id="mapModal"
-	tabindex="-<%=index %>"
-	aria-labelledby="mapModalLabel"
-	aria-hidden="true"
-	inert
->
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-title fs-5 ms-3" id="exampleModalLabel">
-					Location of the Package
-				</h2>
-			</div>
-			<div class="modal-body row align-items-center">
-				<div class="col-11 col-sm-12 tab-border special-tab-border row">
-					<h4>Where you'll be</h4>
-					<div
-						id="map<%=index %>"
-						class="package-item col"
-						data-index="<%=index %>"
-						data-package="<%= JSON.stringify(package) %>"
-					></div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button
-					type="button"
-					class="btn btn-outline-dark"
-					data-bs-dismiss="modal"
-				>
-					Close
-				</button>
-			</div>
-		</div>
-	</div>
+<div class="col-12 col-sm-8 tab-border special-tab-border row mb-3">
+	<div
+		id="map<%=index %>"
+		class="package-item col map"
+		data-index="<%=index %>"
+		data-package="<%= JSON.stringify(package) %>"
+	></div>
 </div>
