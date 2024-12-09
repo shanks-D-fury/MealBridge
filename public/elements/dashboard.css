@@ -7,9 +7,8 @@ main {
 	margin-top: 10px;
 }
 
-
-body{
-	background: linear-gradient(skyblue,lightgreen);
+body {
+	background: linear-gradient(skyblue, lightgreen);
 	box-sizing: border-box;
 }
 h2 {
@@ -18,7 +17,7 @@ h2 {
 .sec-card {
 	border: 5px solid white;
 	border-radius: 10px;
-    padding:5px;
+	padding: 5px;
 	margin-right: 50px;
 }
 
@@ -65,12 +64,12 @@ h2 {
 	top: 0; /* Aligns the image with the top of the container */
 	left: 0; /* Aligns the image with the left of the container */
 }
-.card-group{
+.card-group {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
-.container{
+.container {
 	width: 100vw;
 }
 
@@ -87,9 +86,8 @@ h2 {
 	text-align: center;
 } */
 
-
-.cardcontainer{
-	background: linear-gradient(to right,lightgreen,skyblue);
+.cardcontainer {
+	background: linear-gradient(to right, lightgreen, skyblue);
 	border: 5px solid white;
 	border-radius: 10px;
 }
@@ -174,12 +172,11 @@ body {
 	width: 80vw;
 	justify-content: center;
 	justify-items: center;
-	margin: 5px auto; /* Center the container horizontally */
-
+	/* margin: 5px auto; Center the container horizontally */
+	margin-top: -10vh;
 	/* background: #0056b3; */
 	border-radius: 8px;
 	padding: 20px;
-
 	/* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 

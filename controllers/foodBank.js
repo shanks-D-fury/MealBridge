@@ -57,12 +57,16 @@ module.exports.dashboard = (req, res) => {
 };
 
 module.exports.recievePage = async (req, res) => {
-	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
-	res.render("elements/recieve.ejs", { foodbanks });
+	const packages = await Package.find({})
+		.populate({ path: "products" })
+		.populate({ path: "donar" });
+	res.render("elements/recieve.ejs", { packages });
 };
 
 module.exports.fertilizerPage = async (req, res) => {
-	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
+	const foodbanks = await FoodBank.find({})
+		.populate({ path: "products" })
+		.populate({ path: "donar" });
 	res.render("elements/fertilizer.ejs", { foodbanks });
 };
 
