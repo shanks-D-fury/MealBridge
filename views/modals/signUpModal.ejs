@@ -8,7 +8,7 @@
 <div
 	class="modal fade"
 	id="signUpModal"
-	tabindex="-2"
+	tabindex="-1"
 	aria-labelledby="signUpModalLabel"
 	aria-hidden="true"
 >
@@ -91,7 +91,11 @@
 									</a>
 								</div>
 							</div>
-							<button class="btn btn-outline-dark mb-3" id="submitBtn">
+							<button
+								type="submit"
+								class="btn btn-outline-dark mb-3"
+								id="submitBtn"
+							>
 								Submit
 							</button>
 						</form>
@@ -115,6 +119,9 @@
 			// if (!iti.isValidNumber()) {
 			// 	e.preventDefault();
 			// }
+			//if (!iti.isValidNumber()) {
+			//	e.preventDefault();
+			//}
 			let phoneNumber = phoneInputField.value;
 			phoneNumber = phoneNumber.replace(/\s+/g, "");
 			phoneNumber = Number(phoneNumber);
