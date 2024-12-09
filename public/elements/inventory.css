@@ -2,6 +2,10 @@
 	border-radius: 10px;
 }
 
+.card p{
+	font-size: 30px;
+}
+
 body{
 	background:linear-gradient(skyblue,lightgreen);
 }

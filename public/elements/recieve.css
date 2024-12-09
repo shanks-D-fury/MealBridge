@@ -1,0 +1,33 @@
+
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.user-name-info h5 {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.fa-circle-info {
+    color: #6c757d;
+    font-size: 2rem;
+}
+
+div .mb-1{
+    margin: 0;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.btn-success {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.d-flex {
+    gap: 15px; /* Adds spacing between items in flexbox */
+}
