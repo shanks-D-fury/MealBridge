@@ -19,6 +19,7 @@
 		"express": "^4.21.1",
 		"express-session": "^1.18.1",
 		"joi": "^17.13.3",
+		"leaflet-control-geocoder": "^2.4.0",
 		"method-override": "^3.0.0",
 		"mongoose": "^8.8.1",
 		"node": "^18.20.5",
