@@ -1,10 +1,16 @@
 <% layout("/layouts/boilerPlateNew.ejs") -%>
 <link rel="stylesheet" href="/elements/donar.css" />
 <!-- Include Mapbox CSS and JS -->
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet" />
+<link
+	href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
+	rel="stylesheet"
+/>
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
 <script src="https://unpkg.com/@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css" />
+<link
+	rel="stylesheet"
+	href="https://unpkg.com/@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
+/>
 <body>
 	<div class="row">
 		<div class="col-8 offset-2">
@@ -34,22 +40,28 @@
 				<!-- Hidden fields for latitude and longitude -->
 				<input type="hidden" name="latitude" id="latitude" />
 				<input type="hidden" name="longitude" id="longitude" />
-			<!-- Button to Choose Location -->
-					<section>
-						<button id="choose-location-btn">
-							<img src="images/mapicon.svg" alt="" />
-							Choose Location
-						</button>
-						<div id="overlay"></div>
-						<div id="map-container">
-							<div id="map"></div>
+				<!-- Button to Choose Location -->
+				<section>
+					<button id="choose-location-btn">
+						<img src="images/mapicon.svg" alt="" />
+						Choose Location
+					</button>
+					<div id="overlay"></div>
+					<div id="map-container">
+						<div id="map"></div>
+						<div class="select-loc-class">
+							<button id="select-loc">Select</button>
 						</div>
-					</section>
+					</div>
+				</section>
 				<div id="productRows" class="mt-2"></div>
 				<hr />
 				<button class="btn btn-success">Submit</button>
 			</form>
 		</div>
 	</div>
+	<script>
+		const mapToken = "<%= process.env.MAP_TOKEN %>"; // this is to pass the process.env as a global variable
+	</script>
 	<script src="/JS/donar.js"></script>
 </body>
