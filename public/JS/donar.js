@@ -38,6 +38,30 @@ document.addEventListener("DOMContentLoaded", () => {
                         required
                     />
                 </div>
+				<div class="mb-2 col-md-4">
+                <label for="timer-${index}" class="form-country">Shelf life</label>
+                <div class="d-flex">
+                    <input
+                        id="hours-${index}"
+                        name="products[${index}][hours]"
+                        type="number"
+                        min="0"
+                        placeholder="Hours"
+                        class="form-control me-2"
+                        required
+                    />
+                    <input
+                        id="minutes-${index}"
+                        name="products[${index}][minutes]"
+                        type="number"
+                        min="0"
+                        max="59"
+                        placeholder="Minutes"
+                        class="form-control"
+                        required
+                    />
+                </div>
+            </div>
             </div>`;
 	}
 
@@ -55,77 +79,94 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 });
-//choose location on map
 
-// Initialize the map and set its view
-const map = L.map("map").setView([12.9675794, 77.7139906], 13); // Default center (London)
+// Set your Mapbox access token
+mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhc2hhbmtzOTE5MCIsImEiOiJjbTJmcjlxNmEwYnphMmxzMWViYWNwNTB4In0.svYSuYxjxSIlHF2v8F4uWg';
 
-// Add a draggable marker to the map
-const marker = L.marker([77.7140693, 12.9677017], { draggable: true }).addTo(
-	map
-);
-//  marker.setLatLng([77.7140693,  12.9677017]); // Move the marker
-//  displayLocation(77.7140693,  12.9677017);
+// Initialize the map
+const map = new mapboxgl.Map({
+    container: 'map', // The ID of the map container in the HTML
+    style: 'mapbox://styles/mapbox/streets-v11', // Map style
+    center: [77.7139906, 12.9675794], // Default coordinates [longitude, latitude]
+    zoom: 13,
+});
 
-// Add a tile layer (OpenStreetMap)
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-	attribution:
-		'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
+// Create a marker (initially placed at a default location)
+const marker = new mapboxgl.Marker({ draggable: true })
+    .setLngLat([77.7140693, 12.9677017]) // Initial position
+    .addTo(map);
 
-// Display initial location
-const displayLocation = (lat, lng) => {
-	document.getElementById("latitude").value = lat;
-	document.getElementById("longitude").value = lng;
+// Display latitude and longitude values on the page
+const displayLocation = (lng, lat) => {
+    document.getElementById("latitude").value = lat;
+    document.getElementById("longitude").value = lng;
 };
 displayLocation(77.7140693, 12.9677017);
 
-// Update location details when the marker is dragged
-marker.on("dragend", function () {
-	const position = marker.getLatLng();
-	displayLocation(position.lat, position.lng);
+// Update location when the marker is dragged
+marker.on('dragend', function () {
+    const lngLat = marker.getLngLat();
+    displayLocation(lngLat.lng, lngLat.lat);
 });
 
-// Allow users to click on the map to update the marker's position
-map.on("click", function (event) {
-	const { lat, lng } = event.latlng;
-	marker.setLatLng([lat, lng]); // Move the marker
-	displayLocation(lat, lng); // Update location details
+// Allow users to click on the map to move the marker
+map.on('click', function (e) {
+    const { lng, lat } = e.lngLat;
+    marker.setLngLat([lng, lat]); // Move the marker
+    displayLocation(lng, lat); // Update location details
 });
-// Add the search control (Leaflet Control Geocoder)
-L.Control.geocoder({
-	defaultMarkGeocode: false, // Disable auto marker creation
-})
-	.on("markgeocode", function (e) {
-		const latLng = e.geocode.center; // Get the selected location's coordinates
-		marker.setLatLng(latLng); // Move the marker to the searched location
-		map.setView(latLng, 13); // Center the map on the selected location
-		displayLocation(latLng.lat, latLng.lng); // Update location details
-	})
-	.addTo(map);
 
-// References to elements
+// Create a search control (for geocoding)
+const geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    marker: false, // Disable the default marker
+});
+
+// Add geocoder to the map
+map.addControl(geocoder);
+
+// Handle location search and move the marker
+geocoder.on('result', function (e) {
+    console.log("Search result:", e.result); // Log the search result to check the selected location
+    
+    // Access the coordinates from the 'center' array
+    const [lng, lat] = e.result.center;
+    
+    console.log(`Selected location: Longitude = ${lng}, Latitude = ${lat}`); // Log the coordinates for debugging
+
+    // Move the marker to the selected location
+    marker.setLngLat([lng, lat]); 
+    
+    // Fly to the selected location
+    map.flyTo({ center: [lng, lat], zoom: 13 });
+    
+    // Update location details in the input fields
+    displayLocation(lng, lat); 
+});
+
+
+// Toggle map visibility on button click
 const mapContainer = document.getElementById("map-container");
 const chooseLocationBtn = document.getElementById("choose-location-btn");
 const overlay = document.getElementById("overlay");
 
-// Toggle map visibility on button click
 chooseLocationBtn.addEventListener("click", (e) => {
-	e.preventDefault();
-	mapContainer.style.display = "block"; // Show the map
-	map.invalidateSize(); // Ensure map renders correctly
-	chooseLocationBtn.style.display = "none";
-	overlay.style.display = "block"; // Show the overlay
+    e.preventDefault();
+    mapContainer.style.display = "block"; // Show the map
+    map.resize(); // Ensure the map renders correctly
+    chooseLocationBtn.style.display = "none";
+    overlay.style.display = "block"; // Show the overlay
 });
 
 // Hide map when clicking outside
 document.addEventListener("click", (event) => {
-	if (
-		!mapContainer.contains(event.target) &&
-		event.target !== chooseLocationBtn
-	) {
-		mapContainer.style.display = "none"; // Hide the map
-		chooseLocationBtn.style.display = "block";
-		overlay.style.display = "none";
-	}
+    if (
+        !mapContainer.contains(event.target) &&
+        event.target !== chooseLocationBtn
+    ) {
+        mapContainer.style.display = "none"; // Hide the map
+        chooseLocationBtn.style.display = "block";
+        overlay.style.display = "none";
+    }
 });
