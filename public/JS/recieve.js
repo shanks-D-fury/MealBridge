@@ -1,25 +1,31 @@
-const bookButton = document.getElementById('bookButton');
-const confirmationPopup = document.getElementById('confirmationPopup');
-const popupOverlay = document.getElementById('popupOverlay');
-const confirmButton = document.getElementById('confirmButton');
-const cancelButton = document.getElementById('cancelButton');
-const bookForm = document.getElementById('bookForm');
+const bookPackages = document.querySelectorAll(".bookBtnClass");
+bookPackages.forEach((bookPackage) => {
+	const index = bookPackage.getAttribute("data-book-index");
+	const bookButton = document.getElementById(`bookButton${index}`);
+	const confirmationPopup = document.getElementById(
+		`confirmationPopup${index}`
+	);
+	const popupOverlay = document.getElementById(`popupOverlay${index}`);
+	const confirmButton = document.getElementById(`confirmButton${index}`);
+	const cancelButton = document.getElementById(`cancelButton${index}`);
+	const bookForm = document.getElementById(`bookForm${index}`);
 
-// Show Popup
-bookButton.addEventListener('click', () => {
-    confirmationPopup.style.display = 'block';
-    popupOverlay.style.display = 'block';
-});
+	// Show Popup
+	bookButton.addEventListener("click", () => {
+		confirmationPopup.style.display = "block";
+		popupOverlay.style.display = "block";
+	});
 
-// Confirm Submission
-confirmButton.addEventListener('click', () => {
-    confirmationPopup.style.display = 'none';
-    popupOverlay.style.display = 'none';
-    bookForm.submit(); // Submit the form
-});
+	// Confirm Submission
+	confirmButton.addEventListener("click", () => {
+		confirmationPopup.style.display = "none";
+		popupOverlay.style.display = "none";
+		bookForm.submit(); // Submit the form
+	});
 
-// Cancel Popup
-cancelButton.addEventListener('click', () => {
-    confirmationPopup.style.display = 'none';
-    popupOverlay.style.display = 'none';
+	// Cancel Popup
+	cancelButton.addEventListener("click", () => {
+		confirmationPopup.style.display = "none";
+		popupOverlay.style.display = "none";
+	});
 });
