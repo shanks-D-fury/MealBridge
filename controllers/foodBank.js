@@ -48,12 +48,15 @@ module.exports.donateInfo = async (req, res, next) => {
 };
 
 module.exports.inventory = async (req, res) => {
-	const foodbanks = await FoodBank.find({}).populate({ path: "products" });
-	res.render("elements/inventory.ejs", { foodbanks });
+	const packages = await Package.find({})
+		.populate({ path: "products" })
+		.populate({ path: "donar" });
+	res.render("elements/inventory.ejs", { packages });
 };
 
-module.exports.dashboard = (req, res) => {
-	res.render("elements/dashboard.ejs");
+module.exports.dashboard = async (req, res) => {
+	const foodbanks = await FoodBank.find({});
+	res.render("elements/dashboard.ejs", { foodbanks });
 };
 
 module.exports.recievePage = async (req, res) => {
