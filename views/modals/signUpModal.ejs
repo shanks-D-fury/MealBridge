@@ -112,9 +112,9 @@
 	document
 		.getElementById("signupForm")
 		.addEventListener("submit", function (e) {
-			if (!iti.isValidNumber()) {
-				e.preventDefault();
-			}
+			// if (!iti.isValidNumber()) {
+			// 	e.preventDefault();
+			// }
 			let phoneNumber = phoneInputField.value;
 			phoneNumber = phoneNumber.replace(/\s+/g, "");
 			phoneNumber = Number(phoneNumber);
