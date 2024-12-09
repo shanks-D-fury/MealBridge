@@ -1,5 +1,5 @@
-body{
-	background:linear-gradient(skyblue,lightgreen);
+body {
+	background: linear-gradient(skyblue, lightgreen);
 	font-weight: 700;
 }
 label {
@@ -19,15 +19,15 @@ label {
 	opacity: 0.5;
 }
 .product-row {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping to the next line */
-    gap: 1rem; /* Optional: Add spacing between items */
-    width: 100%; /* Ensure it spans the container */
+	display: flex;
+	flex-wrap: wrap; /* Allow wrapping to the next line */
+	gap: 1rem; /* Optional: Add spacing between items */
+	width: 100%; /* Ensure it spans the container */
 }
 
 .product-row > div {
-    flex: 1 1 calc(50% - 1rem); /* Each item takes 50% width minus gap */
-    box-sizing: border-box; /* Include padding/border in width */
+	flex: 1 1 calc(50% - 1rem); /* Each item takes 50% width minus gap */
+	box-sizing: border-box; /* Include padding/border in width */
 }
 /* Choose Location Button */
 #choose-location-btn {
@@ -39,14 +39,14 @@ label {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-  }
-  
-  #choose-location-btn img {
+}
+
+#choose-location-btn img {
 	margin-right: 10px;
-  }
-  
-  /* Overlay */
-  #overlay {
+}
+
+/* Overlay */
+#overlay {
 	display: none;
 	position: fixed;
 	top: 0;
@@ -55,29 +55,38 @@ label {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 999;
-  }
-  
-  /* Map Container */
-  #map-container {
+}
+
+/* Map Container */
+#map-container {
 	display: none;
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 80%;
-	height: 80%;
+	width: 60%;
+	height: 60%;
 	z-index: 1000;
-  }
-  
-  #map {
+}
+
+#map {
 	width: 100%;
 	height: 100%;
 	border: 2px solid #ccc;
-  }
-  
+}
+#select-loc {
+	position: relative;
+	padding: 0.3rem 0.6rem;
+	color: white;
+	border: 1px solid rgb(0, 123, 255);
+	background-color: rgb(0, 123, 255);
+	border-radius: 0.8rem;
+}
 
-
-
+.select-loc-class {
+	display: flex;
+	flex-direction: row-reverse;
+}
 
 @media (max-width: 768px) {
 	/* .form-select {
@@ -85,13 +94,12 @@ label {
 		font-size: 12.5px;
 	} */
 
-	
-	#map{
-		width: 70vw;  /* 70% of viewport width */
+	#map {
+		width: 70vw; /* 70% of viewport width */
 		height: 50vh; /* 70% of viewport height */
 	}
-	#map-container{
-		width: 70vw;  /* 70% of viewport width */
+	#map-container {
+		width: 70vw; /* 70% of viewport width */
 		height: 50vh; /* 70% of viewport height */
 	}
 }
