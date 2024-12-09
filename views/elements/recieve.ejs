@@ -1,35 +1,47 @@
 <% layout("/layouts/boilerPlateNew.ejs") -%>
 <link rel="stylesheet" href="/elements/inventory.css" />
+<link rel="stylesheet" href="/elements/recieve.css" />
 <body>
 	<div class="container">
 		<h2>Available Donations</h2>
 		<div class="row">
 			<div class="col-md-8">
 				<% for(let package of packages) {%> <% if( !package.accepted){ %>
-				<div class="card p-4 mb-3">
-					<div class="d-flex justify-content-between mt-3 custom-borders">
-						<div>
-							<h5><%=package.donar.username %></h5>
-							<% for(let product of package.products){ %> <%
-							if(!product.expired){ %>
-							<p><%=product.itemName %></p>
-							<% } %> <% } %>
+					<div class="card p-4 mb-3">
+						<!-- Username and Info Icon -->
+						<div class="d-flex justify-content-between align-items-center mt-3">
+							<div class="user-name-info">
+								<h5 class="mb-0"><%= package.donar.username %></h5>
+							</div>
+							<i class="fa-solid fa-circle-info"></i>
 						</div>
-						<div class="text-end">
-							<br />
-							<% for (let product of package.products) { %> <%
-							if(!product.expired){ %>
-							<p><%= product.quantity %></p>
-							<% } %> <% } %>
-							<form
-								action="/foodbank/<%= package._id %>?_method=delete"
-								method="POST"
-							>
+					
+						<!-- Item Names and Quantities -->
+						<div class="d-flex justify-content-between mt-3">
+							<div>
+								<% for (let product of package.products) { %> 
+									<% if (!product.expired) { %>
+										<p class="mb-1"><%= product.itemName %></p>
+									<% } %>
+								<% } %>
+							</div>
+							<div class="text-end">
+								<% for (let product of package.products) { %> 
+									<% if (!product.expired) { %>
+										<p class="mb-1"><%= product.quantity %></p>
+									<% } %>
+								<% } %>
+							</div>
+						</div>
+					
+						<!-- Submit Button -->
+						<div class="text-end mt-3">
+							<form action="/foodbank/<%= package._id %>?_method=delete" method="POST">
 								<button class="btn btn-success">Book</button>
 							</form>
 						</div>
 					</div>
-				</div>
+					
 				<% }%> <% } %>
 			</div>
 		</div>
