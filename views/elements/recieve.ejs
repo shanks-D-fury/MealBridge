@@ -8,9 +8,9 @@
 			<% let index=1; %> <% for(const package of packages) {%> <% if(
 			!package.accepted){ %>
 			<div class="col-md-6">
-				<div class="card p-4 mb-3">
+				<div class="card p-4 mb-3 bookBtnClass" data-book-index="<%=index %>">
 					<!-- Username and Info Icon -->
-					<%- include("../elements/map.ejs", {package ,index}) %> <% index++; %>
+					<%- include("../elements/map.ejs", {package ,index}) %>
 					<h5 class="mb-0"><%= package.donar.username %></h5>
 					<!-- Item Names and Quantities -->
 					<div class="d-flex justify-content-between mt-3">
@@ -30,31 +30,43 @@
 
 					<!-- Submit Button -->
 					<div class="text-end mt-3">
-						<form id="bookForm" action="/foodbank/<%= package._id %>?_method=delete" method="POST">
-							<button type="button" class="btn btn-success" id="bookButton">Book</button>
+						<form
+							id="bookForm<%=index%>"
+							action="/foodbank/<%= package._id %>?_method=delete"
+							method="POST"
+						>
+							<button
+								type="button"
+								class="btn btn-success"
+								id="bookButton<%=index%>"
+							>
+								Book
+							</button>
 						</form>
 					</div>
 				</div>
 			</div>
+			<!-- Confirmation Popup -->
+			<div id="confirmationPopup<%=index%>" class="popup">
+				<p>Are you sure you want to book this package?</p>
+				<div class="d-flex justify-content-between mt-3">
+					<button id="confirmButton<%=index%>" class="btn btn-success">
+						Confirm
+					</button>
+					<button id="cancelButton<%=index%>" class="btn btn-danger">
+						Cancel
+					</button>
+				</div>
+			</div>
 
-								
-					<!-- Confirmation Popup -->
-					<div id="confirmationPopup" class="popup">
-						<p>Are you sure you want to book this package?</p>
-						<div class="d-flex justify-content-between mt-3">
-							<button id="confirmButton" class="btn btn-success">Confirm</button>
-							<button id="cancelButton" class="btn btn-danger">Cancel</button>
-						</div>
-					</div>
-					
-					<!-- Overlay for Popup -->
-					<div id="popupOverlay" class="overlay"></div>
-			<% }%> <% } %>
+			<!-- Overlay for Popup -->
+			<div id="popupOverlay<%=index%>" class="overlay"></div>
+			<% index++; %> <% }%> <% } %>
 		</div>
 	</div>
 	<script src="/JS/recieve.js"></script>
 </body>
 <script>
-	const mapToken = "<%= process.env.MAP_TOKEN %>"; // this is to pass the process.env as a global variable
+	const mapToken = "<%= process.env.MAP_TOKEN %>";
 </script>
 <script src="/JS/map.js"></script>

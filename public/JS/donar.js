@@ -164,7 +164,6 @@ chooseLocationBtn.addEventListener("click", (e) => {
 	mapContainer.style.display = "flex";
 	mapContainer.style.flexDirection = "column";
 	mapContainer.style.gap = "0.9rem";
-
 	map.resize(); // Ensure the map renders correctly
 	chooseLocationBtn.style.display = "none";
 	overlay.style.display = "block"; // Show the overlay

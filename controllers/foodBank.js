@@ -76,29 +76,14 @@ module.exports.fertilizerPage = async (req, res) => {
 module.exports.acceptDonation = async (req, res, next) => {
 	try {
 		let { id } = req.params;
-		const result = await FoodBank.findByIdAndUpdate(id, {
-			$set: { accepted: true },
-		});
-		req.flash("success", "Donation accepted successfully!");
-		res.redirect("/foodbank");
-	} catch (err) {
-		next(err);
-	}
-};
-
-module.exports.deleteDonation = async (req, res, next) => {
-	try {
-		let { id } = req.params;
-		const foodBank = await FoodBank.findById(id);
-		if (!foodBank) {
+		const package = await Package.findById(id);
+		// const result = await Product.deleteMany({
+		// 	_id: { $in: package.products },
+		// });
+		console.log(package);
+		if (!package) {
 			return req.flash("error", "no foodbank found");
 		}
-		const result = await Product.deleteMany({
-			_id: { $in: foodBank.products },
-		});
-		foodBank.products = [];
-		foodBank.accepted = false;
-		await foodBank.save();
 		req.flash("success", "ThankYou for receving !");
 		res.redirect("/dashboard");
 	} catch (err) {
