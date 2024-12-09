@@ -149,10 +149,21 @@ geocoder.on("result", function (e) {
 const mapContainer = document.getElementById("map-container");
 const chooseLocationBtn = document.getElementById("choose-location-btn");
 const overlay = document.getElementById("overlay");
+const selectLoc = document.getElementById("select-loc");
+
+selectLoc.addEventListener("click", (e) => {
+	e.preventDefault();
+	overlay.style.display = "none";
+	mapContainer.style.display = "none";
+	chooseLocationBtn.style.display = "block";
+	alert("hello");
+});
 
 chooseLocationBtn.addEventListener("click", (e) => {
 	e.preventDefault();
-	mapContainer.style.display = "block"; // Show the map
+	mapContainer.style.display = "flex";
+	mapContainer.style.flexDirection = "column";
+	mapContainer.style.gap = "0.9rem";
 	map.resize(); // Ensure the map renders correctly
 	chooseLocationBtn.style.display = "none";
 	overlay.style.display = "block"; // Show the overlay
