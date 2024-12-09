@@ -34,16 +34,30 @@
 							</div>
 						</div>
 					
-						<!-- Submit Button -->
+						<!-- Book Button -->
 						<div class="text-end mt-3">
-							<form action="/foodbank/<%= package._id %>?_method=delete" method="POST">
-								<button class="btn btn-success">Book</button>
+						 <!-- Form -->
+							<form id="bookForm" action="/foodbank/<%= package._id %>?_method=delete" method="POST">
+								<button type="button" class="btn btn-success" id="bookButton">Book</button>
 							</form>
 						</div>
 					</div>
 					
+					<!-- Confirmation Popup -->
+					<div id="confirmationPopup" class="popup">
+						<p>Are you sure you want to book this package?</p>
+						<div class="d-flex justify-content-between mt-3">
+							<button id="confirmButton" class="btn btn-success">Confirm</button>
+							<button id="cancelButton" class="btn btn-danger">Cancel</button>
+						</div>
+					</div>
+					
+					<!-- Overlay for Popup -->
+					<div id="popupOverlay" class="overlay"></div>
+				
 				<% }%> <% } %>
 			</div>
 		</div>
 	</div>
+<script src="/JS/recieve.js"></script>
 </body>
