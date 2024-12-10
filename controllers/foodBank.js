@@ -229,7 +229,7 @@ module.exports.acceptDonationFoodbank = async (req, res, next) => {
 			"donation-email.ejs"
 		);
 		const donarEmail = await ejs.renderFile(donarTemplatePath, {
-			AcceptedBy: foodBank,
+			AcceptedBy: foodBank.title,
 			individualName: package.donar.name,
 			products: package.products,
 			senderEmail: process.env.EMAIL_USER,
