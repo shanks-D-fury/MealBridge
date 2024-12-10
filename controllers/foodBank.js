@@ -29,22 +29,44 @@ module.exports.donateInfo = async (req, res, next) => {
 		const parsedProducts =
 			typeof products === "string" ? JSON.parse(products) : products;
 
+		const now = new Date(); // Current time for calculating timeLeft
+
+		// Calculate timeLeft and insert products
 		const createdProducts = await Product.insertMany(
-			parsedProducts.map((product) => ({
-				itemName: product.itemName,
-				quantity: product.quantity,
-				expireDate: product.expireDate,
-				hours: product.hours,
-				minutes: product.minutes,
-			}))
+			parsedProducts.map((product) => {
+				const expireDate = new Date(product.expireDate);
+
+				// Calculate time left in hours and minutes
+				const timeDifference = expireDate - now; // Difference in milliseconds
+				let timeLeft = null;
+				if (timeDifference > 0) {
+					const hoursLeft = Math.floor(timeDifference / (1000 * 60 * 60));
+					const minutesLeft = Math.floor(
+						(timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+					);
+					timeLeft = { hours: hoursLeft, minutes: minutesLeft };
+				}
+
+				return {
+					itemName: product.itemName,
+					quantity: product.quantity,
+					expireDate: product.expireDate,
+					timeLeft,
+				};
+			})
 		);
 
 		const productIds = createdProducts.map((product) => product._id);
 		const geometry = { coordinates, type: "Point" };
-		const newPackage = new Package({ donar: req.user._id, geometry });
-		newPackage.products.push(...productIds);
-		await newPackage.save();
-
+		const existingPackage = await Package.findOne({ donar: req.user._id });
+		if (!existingPackage) {
+			const newPackage = new Package({ donar: req.user._id, geometry });
+			newPackage.products.push(...productIds);
+			await newPackage.save();
+		} else {
+			existingPackage.products.push(...productIds);
+			await existingPackage.save();
+		}
 		req.flash("success", "Products added successfully!");
 		res.redirect("/dashboard"); // Redirect to another page
 	} catch (err) {

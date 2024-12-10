@@ -2,9 +2,9 @@
 	border-radius: 10px;
 }
 
-.card p {
+/* .card p {
 	font-size: 25px;
-}
+} */
 
 body {
 	background: linear-gradient(skyblue, lightgreen);
@@ -51,6 +51,8 @@ body {
 	border: 5px solid #007b5e;
 	border-radius: 10px;
 }
-.card-large {
-	width: 110%;
+.inventorySpan span {
+	font-size: 1.5rem !important;
+	font-weight: 600 !important;
+	margin: 0 10px !important;
 }

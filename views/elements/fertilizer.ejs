@@ -19,13 +19,13 @@
 							<div class="d-flex justify-content-between mt-3 custom-borders">
 								<div>
 									<% for (const product of products) { %> <% if
-									(!product.expired) { %>
+									(product.expired) { %>
 									<p class="mb-1"><%= product.itemName %></p>
 									<% } %> <% } %>
 								</div>
 								<div class="text-end">
 									<% for (const product of products) { %> <% if
-									(!product.expired) { %>
+									(product.expired) { %>
 									<div
 										class="form-check d-flex justify-content-between align-items-center mb-1"
 									>
