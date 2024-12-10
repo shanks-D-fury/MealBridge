@@ -5,8 +5,16 @@
 		<div class="container mt-3">
 			<h2>Available Manures</h2>
 			<div class="row">
+				<% if(products.length){ %>
 				<div class="col-md-8">
 					<div class="card p-4 mb-3">
+						<b style="font-weight: 500"
+							>MealBridge ensures zero waste by converting unutilized or
+							undonated food into nutrient-rich manure, promoting sustainability
+							and supporting eco-friendly practices while bridging gaps between
+							donors and food banks.
+						</b>
+						<hr />
 						<form action="/manures" id="bookForm" method="POST">
 							<div class="d-flex justify-content-between mt-3 custom-borders">
 								<div>
@@ -61,6 +69,18 @@
 					<!-- Overlay for Popup -->
 					<div id="popupOverlay" class="overlay"></div>
 				</div>
+				<% } else{ %>
+				<div class="col-md-8">
+					<div class="card p-4 mb-3">
+						<h5 class="mb-1">Currently there are no Manures</h5>
+						<div class="text-end mt-3">
+							<a type="button" class="btn btn-success" href="/dashboard"
+								>Go Home!</a
+							>
+						</div>
+					</div>
+				</div>
+				<% } %>
 			</div>
 		</div>
 	</div>

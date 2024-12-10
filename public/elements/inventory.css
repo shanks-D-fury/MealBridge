@@ -2,12 +2,12 @@
 	border-radius: 10px;
 }
 
-.card p{
-	font-size: 30px;
+.card p {
+	font-size: 25px;
 }
 
-body{
-	background:linear-gradient(skyblue,lightgreen);
+body {
+	background: linear-gradient(skyblue, lightgreen);
 }
 .badge-pending {
 	background-color: #f0e68c;

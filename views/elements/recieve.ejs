@@ -5,8 +5,8 @@
 	<div class="container">
 		<h2>Available Donations</h2>
 		<div class="row row-col-xxl-2 recieve-container">
-			<% let index=1; %> <% for(const package of packages) {%> <% if(
-			!package.accepted){ %>
+			<% if(packages.length){ %> <% let index=1; %> <% for(const package of
+			packages) {%> <% if( !package.accepted){ %>
 			<div class="col-md-6">
 				<div class="card p-4 mb-3 bookBtnClass" data-book-index="<%=index %>">
 					<!-- Username and Info Icon -->
@@ -64,7 +64,18 @@
 
 			<!-- Overlay for Popup -->
 			<div id="popupOverlay<%=index%>" class="overlay"></div>
-			<% index++; %> <% }%> <% } %>
+			<% index++; %> <% }%> <% } %> <% } else{ %>
+			<div class="col-md-6">
+				<div class="card p-4 mb-3">
+					<h5 class="mb-1">Currently there are no Donations</h5>
+					<div class="text-end mt-3">
+						<a type="button" class="btn btn-success" href="/dashboard"
+							>Go Home!</a
+						>
+					</div>
+				</div>
+			</div>
+			<% } %>
 		</div>
 	</div>
 	<script src="/JS/recieve.js"></script>
