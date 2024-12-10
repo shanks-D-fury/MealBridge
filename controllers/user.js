@@ -47,11 +47,11 @@ module.exports.logout = (req, res, next) => {
 };
 
 module.exports.adminLogin = (req, res) => {
-	let { password, foodbank } = req.body;
+	let { password, fbID } = req.body;
 	// console.log(password, " ", process.env.ADMIN_PASSWORD);
 	if (password == process.env.ADMIN_PASSWORD) {
 		req.flash("success", "Admin LoggedIn Succesfully!");
-		res.redirect(`/foodbank?foodbank=${foodbank}`);
+		res.redirect(`/foodbank?foodbank=${fbID}`);
 	} else {
 		req.flash("error", "Wrong Admin Password");
 		res.redirect("/dashboard");

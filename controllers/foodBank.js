@@ -5,6 +5,7 @@ const product = require("../models/product.js");
 const transporter = require("../utils/emailConfig.js");
 const ejs = require("ejs");
 const path = require("path");
+const foodBank = require("../models/foodBank.js");
 
 module.exports.fbPage = (req, res) => {
 	res.render("elements/fb.ejs");
@@ -75,11 +76,12 @@ module.exports.donateInfo = async (req, res, next) => {
 };
 
 module.exports.inventory = async (req, res) => {
-	const foodBank = req.query.foodbank || null;
+	const fbID = req.query.foodbank;
+	const foodBanks = await foodBank.find({}).populate({ path: "products" });
 	const packages = await Package.find({})
 		.populate({ path: "products" })
 		.populate({ path: "donar" });
-	res.render("elements/inventory.ejs", { packages, foodBank });
+	res.render("elements/inventory.ejs", { packages, fbID, foodBanks });
 };
 
 module.exports.dashboard = async (req, res) => {
@@ -141,7 +143,6 @@ module.exports.recieveManure = async (req, res, next) => {
 module.exports.acceptDonation = async (req, res, next) => {
 	try {
 		let { id } = req.params;
-		let { foodBank } = req.body;
 		const package = await Package.findByIdAndDelete(id)
 			.populate({ path: "donar" })
 			.populate({ path: "products" });
@@ -165,61 +166,87 @@ module.exports.acceptDonation = async (req, res, next) => {
 			"emails",
 			"recieve-email.ejs"
 		);
-		if (foodBank) {
-			const donarEmail = await ejs.renderFile(donarTemplatePath, {
-				AcceptedBy: foodBank,
-				individualName: package.donar.name,
-				products: package.products,
-				senderEmail: process.env.EMAIL_USER,
-			});
-			const donarMailOptions = {
-				from: `MealBridge Support <${process.env.EMAIL_USER}>`,
-				to: package.donar.email,
-				subject: "Donation Accepted",
-				html: donarEmail,
-			};
-			try {
-				await transporter.sendMail(donarMailOptions);
-			} catch (error) {
-				return next(error);
-			}
-		} else {
-			const recieverEmail = await ejs.renderFile(recieverTemplatePath, {
-				reciverName: req.user.name,
-				package: package,
-				senderEmail: process.env.EMAIL_USER,
-			});
-			const recieveMailOptions = {
-				from: `MealBridge Support <${process.env.EMAIL_USER}>`,
-				to: req.user.email,
-				subject: "Thank You Accepting!",
-				html: recieverEmail,
-			};
-			try {
-				await transporter.sendMail(recieveMailOptions);
-			} catch (error) {
-				return next(error);
-			}
-			const donarEmail = await ejs.renderFile(donarTemplatePath, {
-				AcceptedBy: req.user.name,
-				individualName: package.donar.name,
-				products: package.products,
-				senderEmail: process.env.EMAIL_USER,
-			});
-			const donarMailOptions = {
-				from: `MealBridge Support <${process.env.EMAIL_USER}>`,
-				to: package.donar.email,
-				subject: "Donation Accepted",
-				html: donarEmail,
-			};
-			try {
-				await transporter.sendMail(donarMailOptions);
-			} catch (error) {
-				return next(error);
-			}
+		const recieverEmail = await ejs.renderFile(recieverTemplatePath, {
+			reciverName: req.user.name,
+			package: package,
+			senderEmail: process.env.EMAIL_USER,
+		});
+		const recieveMailOptions = {
+			from: `MealBridge Support <${process.env.EMAIL_USER}>`,
+			to: req.user.email,
+			subject: "Thank You Accepting!",
+			html: recieverEmail,
+		};
+		try {
+			await transporter.sendMail(recieveMailOptions);
+		} catch (error) {
+			return next(error);
+		}
+		const donarEmail = await ejs.renderFile(donarTemplatePath, {
+			AcceptedBy: req.user.name,
+			individualName: package.donar.name,
+			products: package.products,
+			senderEmail: process.env.EMAIL_USER,
+		});
+		const donarMailOptions = {
+			from: `MealBridge Support <${process.env.EMAIL_USER}>`,
+			to: package.donar.email,
+			subject: "Donation Accepted",
+			html: donarEmail,
+		};
+		try {
+			await transporter.sendMail(donarMailOptions);
+		} catch (error) {
+			return next(error);
 		}
 		req.flash("success", "ThankYou for receving !");
 		res.redirect("/dashboard");
+	} catch (err) {
+		next(err);
+	}
+};
+
+module.exports.acceptDonationFoodbank = async (req, res, next) => {
+	try {
+		let { id } = req.params;
+		let { fbID } = req.body;
+		const package = await Package.findByIdAndDelete(id)
+			.populate({ path: "donar" })
+			.populate({ path: "products" });
+		// const foodBankMain=await
+		if (!package) {
+			return req.flash("error", "no foodbank found");
+		}
+		const productIds = package.products.map((product) => product._id);
+		const foodBank = await FoodBank.findById(fbID);
+		foodBank.products.push(...productIds);
+		await foodBank.save();
+		const donarTemplatePath = path.join(
+			__dirname,
+			"..",
+			"views",
+			"emails",
+			"donation-email.ejs"
+		);
+		const donarEmail = await ejs.renderFile(donarTemplatePath, {
+			AcceptedBy: foodBank,
+			individualName: package.donar.name,
+			products: package.products,
+			senderEmail: process.env.EMAIL_USER,
+		});
+		const donarMailOptions = {
+			from: `MealBridge Support <${process.env.EMAIL_USER}>`,
+			to: package.donar.email,
+			subject: "Donation Accepted",
+			html: donarEmail,
+		};
+		try {
+			await transporter.sendMail(donarMailOptions);
+		} catch (error) {
+			return next(error);
+		}
+		req.flash("success", `${foodBank.title} has Recieved the Donation!`);
+		res.redirect(`/foodbank?foodbank=${foodBank._id}`);
 	} catch (err) {
 		next(err);
 	}

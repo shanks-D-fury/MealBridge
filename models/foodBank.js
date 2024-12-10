@@ -8,6 +8,12 @@ const foodBankSchema = new Schema({
 	},
 	location: String,
 	country: String,
+	products: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Product",
+		},
+	],
 });
 
 module.exports = mongoose.model("FoodBank", foodBankSchema);

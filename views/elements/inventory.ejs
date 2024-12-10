@@ -43,15 +43,10 @@
 						<div class="text-end mt-3">
 							<form
 								id="bookForm<%=index%>"
-								action="/foodbank/<%= package._id %>?_method=delete"
+								action="/foodbank/<%= package._id %>?_method=put"
 								method="POST"
 							>
-								<input
-									name="foodBank"
-									type="text"
-									value="<%=foodBank%>"
-									hidden
-								/>
+								<input name="fbID" type="text" value="<%=fbID%>" hidden />
 								<button
 									type="button"
 									class="btn btn-success"
@@ -120,8 +115,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%for(const products of package.products){ for(const product of
-								products){ if(!product.expired){%>
+								<%for(const foodBank of foodBanks){ for(const product of
+								foodBank.products){ if(!product.expired){%>
 								<tr>
 									<td><%=product.itemName %></td>
 									<td><%=product.quantity %></td>

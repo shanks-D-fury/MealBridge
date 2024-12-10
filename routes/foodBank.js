@@ -26,6 +26,9 @@ router
 	.get(isLoggedIn, fbController.fertilizerPage)
 	.post(fbController.recieveManure);
 
-router.route("/foodbank/:id").delete(isLoggedIn, fbController.acceptDonation);
+router
+	.route("/foodbank/:id")
+	.delete(isLoggedIn, fbController.acceptDonation)
+	.put(fbController.acceptDonationFoodbank);
 
 module.exports = router;
