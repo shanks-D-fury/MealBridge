@@ -12,10 +12,6 @@ const productSchema = new Schema({
 			return date;
 		},
 	},
-	hours: {
-		type: Number,
-	},
-	minutes: { type: Number },
 	expired: {
 		type: Boolean,
 		default: false,

@@ -38,31 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         required
                     />
                 </div>
-				<div class="mb-2 col-md-4">
-                <label for="timer-${index}" class="form-country">Shelf life</label>
-                <div class="d-flex">
-                    <input
-                        id="hours-${index}"
-                        name="products[${index}][hours]"
-                        type="number"
-                        min="0"
-                        placeholder="Hours"
-                        class="form-control me-2"
-                        required
-                    />
-                    <input
-                        id="minutes-${index}"
-                        name="products[${index}][minutes]"
-                        type="number"
-                        min="0"
-                        max="59"
-                        placeholder="Minutes"
-                        class="form-control"
-                        required
-                    />
-                </div>
             </div>
-            </div>`;
+			<hr />`;
 	}
 
 	// Event listener to generate rows based on the number input
@@ -156,7 +133,6 @@ selectLoc.addEventListener("click", (e) => {
 	overlay.style.display = "none";
 	mapContainer.style.display = "none";
 	chooseLocationBtn.style.display = "block";
-	alert("hello");
 });
 
 chooseLocationBtn.addEventListener("click", (e) => {

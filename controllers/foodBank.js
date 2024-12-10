@@ -73,10 +73,47 @@ module.exports.recievePage = async (req, res) => {
 };
 
 module.exports.fertilizerPage = async (req, res) => {
-	const foodbanks = await FoodBank.find({})
-		.populate({ path: "products" })
-		.populate({ path: "donar" });
-	res.render("elements/fertilizer.ejs", { foodbanks });
+	const products = await Product.find({});
+	res.render("elements/fertilizer.ejs", { products });
+};
+
+module.exports.recieveManure = async (req, res, next) => {
+	try {
+		const selectedIDProducts = req.body.selectedProducts;
+		const productsSelected = await Product.find({
+			_id: { $in: selectedIDProducts },
+		});
+		const deletedProducts = await Product.deleteMany({
+			_id: { $in: selectedIDProducts },
+		});
+		const recieverTemplatePath = path.join(
+			__dirname,
+			"..",
+			"views",
+			"emails",
+			"manure-email.ejs"
+		);
+		const recieverEmail = await ejs.renderFile(recieverTemplatePath, {
+			reciverName: req.user.name,
+			products: productsSelected,
+			senderEmail: process.env.EMAIL_USER,
+		});
+		const recieveMailOptions = {
+			from: `MealBridge Support <${process.env.EMAIL_USER}>`,
+			to: req.user.email,
+			subject: "Manures Claimed Successfully!",
+			html: recieverEmail,
+		};
+		try {
+			await transporter.sendMail(recieveMailOptions);
+		} catch (error) {
+			return next(error);
+		}
+		req.flash("success", "ThankYou for Claiming Manures!");
+		res.redirect("/dashboard");
+	} catch (err) {
+		next(err);
+	}
 };
 
 module.exports.acceptDonation = async (req, res, next) => {
@@ -113,14 +150,14 @@ module.exports.acceptDonation = async (req, res, next) => {
 				products: package.products,
 				senderEmail: process.env.EMAIL_USER,
 			});
-			const mailOptions = {
+			const donarMailOptions = {
 				from: `MealBridge Support <${process.env.EMAIL_USER}>`,
 				to: package.donar.email,
 				subject: "Donation Accepted",
 				html: donarEmail,
 			};
 			try {
-				await transporter.sendMail(mailOptions);
+				await transporter.sendMail(donarMailOptions);
 			} catch (error) {
 				return next(error);
 			}
@@ -132,7 +169,7 @@ module.exports.acceptDonation = async (req, res, next) => {
 			});
 			const recieveMailOptions = {
 				from: `MealBridge Support <${process.env.EMAIL_USER}>`,
-				to: package.donar.email,
+				to: req.user.email,
 				subject: "Thank You Accepting!",
 				html: recieverEmail,
 			};
