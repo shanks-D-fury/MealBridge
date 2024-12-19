@@ -1,6 +1,11 @@
 const Product = require("../models/product.js");
 const FoodBank = require("../models/foodBank.js");
 const Package = require("../models/package.js");
+const product = require("../models/product.js");
+const transporter = require("../utils/emailConfig.js");
+const ejs = require("ejs");
+const path = require("path");
+const foodBank = require("../models/foodBank.js");
 
 module.exports.fbPage = (req, res) => {
 	res.render("elements/fb.ejs");
@@ -13,9 +18,8 @@ module.exports.fbInfo = async (req, res) => {
 	res.redirect("/dashboard");
 };
 
-module.exports.donatePage = async (req, res, next) => {
-	const foodbanks = await FoodBank.find({});
-	res.render("elements/donar.ejs", { foodbanks });
+module.exports.donatePage = (req, res, next) => {
+	res.render("elements/donar.ejs");
 };
 
 module.exports.donateInfo = async (req, res, next) => {
@@ -26,20 +30,44 @@ module.exports.donateInfo = async (req, res, next) => {
 		const parsedProducts =
 			typeof products === "string" ? JSON.parse(products) : products;
 
+		const now = new Date(); // Current time for calculating timeLeft
+
+		// Calculate timeLeft and insert products
 		const createdProducts = await Product.insertMany(
-			parsedProducts.map((product) => ({
-				itemName: product.itemName,
-				quantity: product.quantity,
-				expireDate: product.expireDate,
-			}))
+			parsedProducts.map((product) => {
+				const expireDate = new Date(product.expireDate);
+
+				// Calculate time left in hours and minutes
+				const timeDifference = expireDate - now; // Difference in milliseconds
+				let timeLeft = null;
+				if (timeDifference > 0) {
+					const hoursLeft = Math.floor(timeDifference / (1000 * 60 * 60));
+					const minutesLeft = Math.floor(
+						(timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+					);
+					timeLeft = { hours: hoursLeft, minutes: minutesLeft };
+				}
+
+				return {
+					itemName: product.itemName,
+					quantity: product.quantity,
+					expireDate: product.expireDate,
+					timeLeft,
+				};
+			})
 		);
 
 		const productIds = createdProducts.map((product) => product._id);
 		const geometry = { coordinates, type: "Point" };
-		const newPackage = new Package({ donar: req.user._id, geometry });
-		newPackage.products.push(...productIds);
-		await newPackage.save();
-
+		const existingPackage = await Package.findOne({ donar: req.user._id });
+		if (!existingPackage) {
+			const newPackage = new Package({ donar: req.user._id, geometry });
+			newPackage.products.push(...productIds);
+			await newPackage.save();
+		} else {
+			existingPackage.products.push(...productIds);
+			await existingPackage.save();
+		}
 		req.flash("success", "Products added successfully!");
 		res.redirect("/dashboard"); // Redirect to another page
 	} catch (err) {
@@ -48,10 +76,12 @@ module.exports.donateInfo = async (req, res, next) => {
 };
 
 module.exports.inventory = async (req, res) => {
+	const fbID = req.query.foodbank;
+	const foodBanks = await foodBank.find({}).populate({ path: "products" });
 	const packages = await Package.find({})
 		.populate({ path: "products" })
 		.populate({ path: "donar" });
-	res.render("elements/inventory.ejs", { packages });
+	res.render("elements/inventory.ejs", { packages, fbID, foodBanks });
 };
 
 module.exports.dashboard = async (req, res) => {
@@ -67,25 +97,156 @@ module.exports.recievePage = async (req, res) => {
 };
 
 module.exports.fertilizerPage = async (req, res) => {
-	const foodbanks = await FoodBank.find({})
-		.populate({ path: "products" })
-		.populate({ path: "donar" });
-	res.render("elements/fertilizer.ejs", { foodbanks });
+	const products = await Product.find({});
+	res.render("elements/fertilizer.ejs", { products });
+};
+
+module.exports.recieveManure = async (req, res, next) => {
+	try {
+		const selectedIDProducts = req.body.selectedProducts;
+		const productsSelected = await Product.find({
+			_id: { $in: selectedIDProducts },
+		});
+		const deletedProducts = await Product.deleteMany({
+			_id: { $in: selectedIDProducts },
+		});
+		const recieverTemplatePath = path.join(
+			__dirname,
+			"..",
+			"views",
+			"emails",
+			"manure-email.ejs"
+		);
+		const recieverEmail = await ejs.renderFile(recieverTemplatePath, {
+			reciverName: req.user.name,
+			products: productsSelected,
+			senderEmail: process.env.EMAIL_USER,
+		});
+		const recieveMailOptions = {
+			from: `MealBridge Support <${process.env.EMAIL_USER}>`,
+			to: req.user.email,
+			subject: "Manures Claimed Successfully!",
+			html: recieverEmail,
+		};
+		try {
+			await transporter.sendMail(recieveMailOptions);
+		} catch (error) {
+			return next(error);
+		}
+		req.flash("success", "ThankYou for Claiming Manures!");
+		res.redirect("/dashboard");
+	} catch (err) {
+		next(err);
+	}
 };
 
 module.exports.acceptDonation = async (req, res, next) => {
 	try {
 		let { id } = req.params;
-		const package = await Package.findById(id);
-		// const result = await Product.deleteMany({
-		// 	_id: { $in: package.products },
-		// });
-		console.log(package);
+		const package = await Package.findByIdAndDelete(id)
+			.populate({ path: "donar" })
+			.populate({ path: "products" });
+		const result = await Product.deleteMany({
+			_id: { $in: package.products },
+		});
 		if (!package) {
 			return req.flash("error", "no foodbank found");
 		}
+		const donarTemplatePath = path.join(
+			__dirname,
+			"..",
+			"views",
+			"emails",
+			"donation-email.ejs"
+		);
+		const recieverTemplatePath = path.join(
+			__dirname,
+			"..",
+			"views",
+			"emails",
+			"recieve-email.ejs"
+		);
+		const recieverEmail = await ejs.renderFile(recieverTemplatePath, {
+			reciverName: req.user.name,
+			package: package,
+			senderEmail: process.env.EMAIL_USER,
+		});
+		const recieveMailOptions = {
+			from: `MealBridge Support <${process.env.EMAIL_USER}>`,
+			to: req.user.email,
+			subject: "Thank You Accepting!",
+			html: recieverEmail,
+		};
+		try {
+			await transporter.sendMail(recieveMailOptions);
+		} catch (error) {
+			return next(error);
+		}
+		const donarEmail = await ejs.renderFile(donarTemplatePath, {
+			AcceptedBy: req.user.name,
+			individualName: package.donar.name,
+			products: package.products,
+			senderEmail: process.env.EMAIL_USER,
+		});
+		const donarMailOptions = {
+			from: `MealBridge Support <${process.env.EMAIL_USER}>`,
+			to: package.donar.email,
+			subject: "Donation Accepted",
+			html: donarEmail,
+		};
+		try {
+			await transporter.sendMail(donarMailOptions);
+		} catch (error) {
+			return next(error);
+		}
 		req.flash("success", "ThankYou for receving !");
 		res.redirect("/dashboard");
+	} catch (err) {
+		next(err);
+	}
+};
+
+module.exports.acceptDonationFoodbank = async (req, res, next) => {
+	try {
+		let { id } = req.params;
+		let { fbID } = req.body;
+		const package = await Package.findByIdAndDelete(id)
+			.populate({ path: "donar" })
+			.populate({ path: "products" });
+		// const foodBankMain=await
+		if (!package) {
+			return req.flash("error", "no foodbank found");
+		}
+		const productIds = package.products.map((product) => product._id);
+		const foodBank = await FoodBank.findById(fbID);
+		foodBank.products.push(...productIds);
+		await foodBank.save();
+		const donarTemplatePath = path.join(
+			__dirname,
+			"..",
+			"views",
+			"emails",
+			"donation-email.ejs"
+		);
+		const donarEmail = await ejs.renderFile(donarTemplatePath, {
+			AcceptedBy: foodBank.title,
+			individualName: package.donar.name,
+			products: package.products,
+			senderEmail: process.env.EMAIL_USER,
+		});
+		const donarMailOptions = {
+			from: `MealBridge Support <${process.env.EMAIL_USER}>`,
+			to: package.donar.email,
+			subject: "Donation Accepted",
+			html: donarEmail,
+		};
+		try {
+			await transporter.sendMail(donarMailOptions);
+		} catch (error) {
+			return next(error);
+		}
+		req.flash("success", `${foodBank.title} has Recieved the Donation!`);
+		res.redirect(`/foodbank?foodbank=${foodBank._id}`);
 	} catch (err) {
 		next(err);
 	}

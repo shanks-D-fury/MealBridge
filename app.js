@@ -10,8 +10,11 @@ const MongoStore = require("connect-mongo");
 const passport = require("passport");
 const flash = require("connect-flash");
 const LocalStrategy = require("passport-local");
-
-const mongo_url = "mongodb://127.0.0.1:27017/MealBridge";
+if (process.env.NODE_ENV != "production") {
+	require("dotenv").config();
+}
+// const Mongo_url = process.env.LOCAL_MAC_MONGO_URL;
+const Mongo_url = process.env.ATLAS_MONGO_URL;
 const User = require("./models/user.js");
 const ExpressError = require("./utils/ExpressError.js");
 const userRouter = require("./routes/user.js");
@@ -20,23 +23,23 @@ const { isLoggedIn } = require("./utils/Middlewares.js");
 const cron = require("node-cron");
 const markExpiredProducts = require("./utils/updateExpired.js");
 
-// // FROM HERE
-// const store = MongoStore.create({
-// 	mongoUrl: Mongo_url,
-// 	crypto: {
-// 		secret: process.env.SESSION_SECRET_KEY,
-// 	},
-// 	touchAfter: 24 * 60 * 60,
-// });
+// FROM HERE
+const store = MongoStore.create({
+	mongoUrl: Mongo_url,
+	crypto: {
+		secret: process.env.SESSION_SECRET_KEY,
+	},
+	touchAfter: 24 * 60 * 60,
+});
 
-// store.on("error", () => {
-// 	console.log("Mongo store Error", err);
-// }); // TO HERE comment this while working on local machine
+store.on("error", () => {
+	console.log("Mongo store Error", err);
+}); // TO HERE comment this while working on local machine
 
 const sessionOptions = {
-	// store, // comment this line for hosting from the local machine
-	// secret: process.env.SESSION_SECRET_KEY,
-	secret: "change_while_deployment",
+	store, // comment this line for hosting from the local machine
+	secret: process.env.SESSION_SECRET_KEY,
+	secret: process.env.SESSION_SECRET_KEY,
 	resave: false,
 	saveUninitialized: true,
 	cookie: {
@@ -70,13 +73,12 @@ main()
 	})
 	.catch((err) => console.log(err));
 
-cron.schedule("0 * * * *", async () => {
-	console.log("Running daily expiration check...");
+cron.schedule("*/2 * * * *", async () => {
 	await markExpiredProducts();
 });
 
 async function main() {
-	await mongoose.connect(mongo_url);
+	await mongoose.connect(Mongo_url);
 }
 app.use((req, res, next) => {
 	res.locals.success = req.flash("success");

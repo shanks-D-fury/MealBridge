@@ -21,8 +21,14 @@ router.route("/dashboard").get(isLoggedIn, fbController.dashboard);
 
 router.route("/recieve").get(isLoggedIn, fbController.recievePage);
 
-router.route("/fertilizer").get(isLoggedIn, fbController.fertilizerPage);
+router
+	.route("/manures")
+	.get(isLoggedIn, fbController.fertilizerPage)
+	.post(fbController.recieveManure);
 
-router.route("/foodbank/:id").delete(isLoggedIn, fbController.acceptDonation);
+router
+	.route("/foodbank/:id")
+	.delete(isLoggedIn, fbController.acceptDonation)
+	.put(fbController.acceptDonationFoodbank);
 
 module.exports = router;
