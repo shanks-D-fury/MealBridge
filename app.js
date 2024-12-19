@@ -10,7 +10,9 @@ const MongoStore = require("connect-mongo");
 const passport = require("passport");
 const flash = require("connect-flash");
 const LocalStrategy = require("passport-local");
-
+if (process.env.NODE_ENV != "production") {
+	require("dotenv").config();
+}
 // const Mongo_url = process.env.LOCAL_MAC_MONGO_URL;
 const Mongo_url = process.env.ATLAS_MONGO_URL;
 const User = require("./models/user.js");
@@ -76,10 +78,7 @@ cron.schedule("*/2 * * * *", async () => {
 });
 
 async function main() {
-	await mongoose.connect(Mongo_url, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	});
+	await mongoose.connect(Mongo_url);
 }
 app.use((req, res, next) => {
 	res.locals.success = req.flash("success");
